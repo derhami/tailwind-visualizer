@@ -2,33 +2,8 @@
 <html lang="fa" dir="rtl">
   <head>
     <meta charset="UTF-8" />
-    <script>
-      // Polyfill to prevent "TypeError: Cannot set property fetch of #<Window> which has only a getter"
-      (function() {
-        try {
-          var currentFetch = window.fetch;
-          Object.defineProperty(window, 'fetch', {
-            get: function() { return currentFetch; },
-            set: function(val) { currentFetch = val; },
-            configurable: true,
-            enumerable: true
-          });
-        } catch (e) {
-          try {
-            var protoFetch = Window.prototype.fetch;
-            Object.defineProperty(Window.prototype, 'fetch', {
-              get: function() { return protoFetch; },
-              set: function(val) { protoFetch = val; },
-              configurable: true,
-              enumerable: true
-            });
-          } catch (e2) {
-            console.warn("Could not polyfill window.fetch setter:", e2);
-          }
-        }
-      })();
-    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2322d3ee'%3E%3Cpath d='M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z'/%3E%3C/svg%3E" />
     <title>Tailwind Design System Visualizer Pro</title>
     <!-- Import Vazirmatn font from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

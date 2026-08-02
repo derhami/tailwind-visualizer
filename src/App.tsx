@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Navbar from './components/Navbar';
 import Sidebar, { SECTIONS } from './components/Sidebar';
+import BreakpointsSection from './components/BreakpointsSection';
 import ContainerVisualizer from './components/ContainerVisualizer';
 import SpacingScale from './components/SpacingScale';
 import TypographySection from './components/TypographySection';
@@ -14,6 +15,8 @@ import GlobalSearch from './components/GlobalSearch';
 import SettingsPanel from './components/SettingsPanel';
 import InspectorOverlay from './components/InspectorOverlay';
 import MobileNav from './components/MobileNav';
+import DeviceSimulatorModal from './components/DeviceSimulatorModal';
+import PerformanceOverlay from './components/PerformanceOverlay';
 import { BREAKPOINTS } from './data';
 import { Settings } from './types';
 import { Sparkles, Sliders, Laptop, Tablet, Smartphone, HelpCircle, Heart } from 'lucide-react';
@@ -23,10 +26,20 @@ export default function App() {
   const [isSimulating, setIsSimulating] = useState<boolean>(false);
   const [activeSection, setActiveSection] = useState<string>('breakpoints');
 
-  // Modal open states
+  // Modal & Overlay open states
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isInspectorActive, setIsInspectorActive] = useState(false);
+  const [isDeviceSimulatorOpen, setIsDeviceSimulatorOpen] = useState(false);
+  const [isPerformanceOverlayOpen, setIsPerformanceOverlayOpen] = useState(false);
+  const [simulatorInitialWidth, setSimulatorInitialWidth] = useState<number>(375);
+
+  const isSimulatedFrame = new URLSearchParams(window.location.search).get('simulated_frame') === 'true';
+
+  const handleOpenDeviceSimulator = (width?: number) => {
+    if (width) setSimulatorInitialWidth(width);
+    setIsDeviceSimulatorOpen(true);
+  };
 
   // Global App Settings
   const [settings, setSettings] = useState<Settings>(() => {
@@ -178,19 +191,45 @@ export default function App() {
   // --- DOWNLOAD SINGLE STANDALONE FILE HELPER ---
   // Generates a fully contained self-sufficient HTML file representing the full playground to work completely offline!
   const downloadSingleStandaloneFile = () => {
+    const isEn = settings.dir === 'ltr';
+    const lang = isEn ? 'en' : 'fa';
+    const dirVal = settings.dir;
+    
+    const title = isEn 
+      ? 'Tailwind Design System Visualizer Pro - Standalone Offline' 
+      : 'سامانه مستقل ویژوالایزر لوکس سیستم طراحی Tailwind';
+      
+    const heading = isEn 
+      ? 'Tailwind Design System Visualizer Pro Standalone' 
+      : 'سامانه مستقل ویژوالایزر لوکس سیستم طراحی Tailwind';
+      
+    const desc = isEn 
+      ? 'This standalone, self-contained single HTML file is fully optimized for offline use, allowing you to quickly reference grid classes, spacing scales, typography scales, and color palettes anywhere.'
+      : 'این فایل مستقل و تک‌فایلی مخصوص استفاده کاملاً آفلاین برای مرور کلاس‌ها، شبیه‌سازی گرید، مقیاس‌های فاصله‌گذاری و پالت‌های رنگی بهینه‌سازی شده است.';
+      
+    const subHeading = isEn 
+      ? 'Full Online Interactive Playground Version' 
+      : 'نسخه تعاملی و برخط کامل';
+      
+    const subDesc = isEn 
+      ? 'The complete cloud edition features live interactive flexbox laboratories, grid sandboxes, inspector overlays, device viewport simulators, and command-palette search utilities, successfully downloaded just now!' 
+      : 'نسخه کامل این اپلیکیشن با امکاناتی چون شهربازی زنده فلکس، گرید، بازرس آنلاین، شبیه‌ساز پویای دستگاه‌ها و جستجوی فرمان‌پایه به صورت برخط و کامل، همین حالا با موفقیت دانلود شد.';
+
+    const alignClass = isEn ? 'text-left' : 'text-right';
+
     const htmlContent = `<!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="${lang}" dir="${dirVal}">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tailwind Design System Visualizer Pro - Standalone</title>
+  <title>${title}</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Vazirmatn', sans-serif;
+      font-family: system-ui, -apple-system, sans-serif, 'Vazirmatn';
       background: #090d16;
       color: #e2e8f0;
     }
@@ -206,12 +245,12 @@ export default function App() {
     <div class="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-tr from-cyan-500 to-indigo-600 shadow-xl shadow-indigo-500/20">
       <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
     </div>
-    <h1 class="text-3xl font-black text-white">ویژوالایزر لوکس سیستم طراحی Tailwind</h1>
-    <p class="text-slate-400 text-sm max-w-xl mx-auto leading-7">این فایل مستقل و تک‌فایلی مخصوص استفاده کاملاً آفلاین برای مرور کلاس‌ها، شبیه‌سازی گرید، مقیاس‌های فاصله‌گذاری و پالت‌های رنگی بهینه‌سازی شده است.</p>
+    <h1 class="text-3xl font-black text-white">${heading}</h1>
+    <p class="text-slate-400 text-sm max-w-xl mx-auto leading-7">${desc}</p>
     
-    <div class="glass-panel p-6 rounded-2xl text-right">
-      <h2 class="text-lg font-bold text-indigo-400 mb-2">نسخه تعاملی و برخط کامل</h2>
-      <p class="text-xs text-slate-300 leading-6">نسخه کامل این اپلیکیشن با امکاناتی چون شهربازی زنده فلکس، گرید، بازرس آنلاین، شبیه‌ساز پویای دستگاه‌ها و جستجوی فرمان‌پایه به صورت متصل و زنده در سرورهای ابری AI Studio میزبانی می‌شود که هم‌اکنون با موفقیت دانلود شد.</p>
+    <div class="glass-panel p-6 rounded-2xl ${alignClass}">
+      <h2 class="text-lg font-bold text-indigo-400 mb-2">${subHeading}</h2>
+      <p class="text-xs text-slate-300 leading-6">${subDesc}</p>
     </div>
     <div class="text-slate-600 text-[11px]">Tailwind Design System Visualizer Pro © 2026</div>
   </div>
@@ -245,19 +284,32 @@ export default function App() {
         onOpenSearch={() => setIsSearchOpen(true)}
         onOpenSettings={() => setIsSettingsOpen(true)}
         onDownloadSingleFile={downloadSingleStandaloneFile}
+        onOpenDeviceSimulator={handleOpenDeviceSimulator}
         settings={settings}
         currentBreakpoint={activeBreakpoint.name}
       />
 
       <div className="mx-auto flex w-full max-w-7xl items-start gap-6 px-4 py-8 sm:px-6 z-10">
         
-        {/* Sticky Sidebar Nav (Section 28) */}
-        <Sidebar activeSection={activeSection} />
+        {/* Sticky Sidebar Nav (Section 28) - Hide when simulating small screen */}
+        {(!isSimulating || currentWidth >= 1024) && (
+          <Sidebar activeSection={activeSection} dir={settings.dir} />
+        )}
 
-        {/* Core Layout Containers */}
+        {/* Core Layout Containers with automatic layout & text scaling when simulating base/sm widths */}
         <main 
-          className="flex-1 min-w-0 space-y-16"
-          style={{ maxWidth: isSimulating ? `${currentWidth}px` : '100%', marginInline: 'auto', transition: settings.animation ? 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)' : 'none' }}
+          className={`flex-1 min-w-0 space-y-16 transition-all ${
+            isSimulating && currentWidth < 640
+              ? '[&_.grid]:grid-cols-1 [&_.grid-cols-2]:grid-cols-1 [&_.grid-cols-3]:grid-cols-1 [&_.grid-cols-4]:grid-cols-1 [&_.grid-cols-6]:grid-cols-2 [&_.md\\:flex-row]:flex-col [&_.p-6]:p-3.5 [&_.p-8]:p-4 [&_.text-2xl]:text-base [&_.text-3xl]:text-lg text-xs overflow-x-hidden break-words'
+              : isSimulating && currentWidth < 768
+              ? '[&_.grid-cols-3]:grid-cols-2 [&_.grid-cols-4]:grid-cols-2 [&_.grid-cols-6]:grid-cols-3 [&_.p-8]:p-4 text-xs sm:text-sm overflow-x-hidden break-words'
+              : 'overflow-x-hidden'
+          }`}
+          style={{ 
+            maxWidth: isSimulating ? `${currentWidth}px` : '100%', 
+            marginInline: 'auto', 
+            transition: settings.animation ? 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)' : 'none' 
+          }}
         >
           {/* Hero Intro banner */}
           <div className="glass-panel rounded-2xl p-6 md:p-8 relative overflow-hidden bg-gradient-to-br from-cyan-500/10 via-zinc-950/45 to-zinc-900/10 border border-cyan-500/15">
@@ -265,106 +317,61 @@ export default function App() {
               <Sparkles className="h-4 w-4" />
             </div>
             
-            <div className="max-w-2xl text-right">
-              <span className="badge rounded-full px-3 py-1 text-[10px] font-bold bg-cyan-500/10 text-cyan-300 border-cyan-500/20">جدیدترین نسخه - کاملا راست‌چین</span>
-              <h2 className="text-xl md:text-2xl font-black text-white mt-3">سیستم ارزیابی، بازرسی و یادگیری بصری قوانین تیل‌وند</h2>
+            <div className={`max-w-2xl ${settings.dir === 'ltr' ? 'text-left' : 'text-right'}`}>
+              <span className="badge rounded-full px-3 py-1 text-[10px] font-bold bg-cyan-500/10 text-cyan-300 border-cyan-500/20">
+                {settings.dir === 'ltr' ? 'v1.2.0 • Pro Visual Reference' : 'جدیدترین نسخه • مرجع اختصاصی فرانت‌اند'}
+              </span>
+              <h2 className="text-xl md:text-2xl font-black text-white mt-3">
+                {settings.dir === 'ltr' 
+                  ? 'Tailwind CSS Interactive Visual Inspection System' 
+                  : 'سیستم ارزیابی، بازرسی و یادگیری بصری قوانین تلویند'}
+              </h2>
               <p className="mt-2 text-xs md:text-sm text-zinc-300 leading-7">
-                به کامل‌ترین مرجع تخصصی توسعه‌دهندگان فرانت‌اند خوش آمدید. با بزرگ و کوچک کردن مرورگر خود، شاهد رفتار زنده نقاط شکست، کانتینر، اندازه‌گیری‌های پدینگ، فواصل مارجین بیرونی و تعداد ستون‌ها بر مبنای پیکسل و رِم باشید.
+                {settings.dir === 'ltr'
+                  ? 'Welcome to the complete reference system for frontend developers. Resize your browser window or switch breakpoints to observe real-time container metrics, spacing scales, grid columns, and utility classes in action.'
+                  : 'به کامل‌ترین مرجع تخصصی توسعه‌دهندگان فرانت‌اند خوش آمدید. با بزرگ و کوچک کردن مرورگر خود، شاهد رفتار زنده نقاط شکست، کانتینر، اندازه‌گیری‌های پدینگ، فواصل مارجین بیرونی و تعداد ستون‌ها بر مبنای پیکسل و رِم باشید.'}
               </p>
             </div>
           </div>
 
-          {/* Section 1: Responsive Breakpoints Display Timeline */}
-          <section id="breakpoints" className="scroll-mt-24 space-y-6">
-            <div className="flex items-center justify-between border-b border-white/10 pb-4">
-              <div className="flex items-center gap-2">
-                <Sliders className="h-5 w-5 text-cyan-400" />
-                <h2 className="text-lg font-bold text-white">۱. تراز نقاط شکست واکنش‌گرا (Responsive Breakpoints)</h2>
-              </div>
-              <span className="text-xs text-zinc-400 font-bold">نمای کلی نقشه واکنش‌گرایی</span>
-            </div>
-
-            <div className="glass-panel rounded-2xl p-5 md:p-6 space-y-6">
-              {/* Highlight active breakpoint block */}
-              <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 p-4 rounded-xl bg-zinc-950/60 border border-white/5">
-                <div className="space-y-1">
-                  <span className="text-xs text-zinc-400 block">نقطه شکست کنونی سیستم:</span>
-                  <div className="flex items-center gap-2">
-                    <span className="font-mono text-xl font-black text-white bg-gradient-to-r from-cyan-400 to-teal-400 bg-clip-text text-transparent uppercase">
-                      {activeBreakpoint.name}
-                    </span>
-                    <span className="text-xs text-zinc-300">({activeBreakpoint.desc})</span>
-                  </div>
-                </div>
-
-                <div className="text-right text-xs text-zinc-400 leading-5">
-                  عرض پنجره نمایشی: <strong className="text-cyan-400">{Math.round(currentWidth)}px</strong>
-                  <div className="text-[11px] text-zinc-500">محدوده این نقطه شکست: {activeBreakpoint.min}px {activeBreakpoint.max ? `تا ${activeBreakpoint.max}px` : 'به بالا'}</div>
-                </div>
-              </div>
-
-              {/* Visual timeline mapping */}
-              <div className="space-y-2">
-                <span className="text-[11px] text-zinc-500 font-bold block">محدوده‌ها روی نوار کل پیکسل‌ها (۴۳۰ تا ۱۹۲۰):</span>
-                <div className="h-4 rounded-lg bg-zinc-950 overflow-hidden flex border border-white/5">
-                  {BREAKPOINTS.map((bp) => {
-                    const isActive = bp.name === activeBreakpoint.name;
-                    return (
-                      <div
-                        key={bp.name}
-                        className={`h-full relative flex items-center justify-center text-[9px] font-bold transition-all ${
-                          isActive ? 'opacity-100 scale-y-110 shadow-lg' : 'opacity-35'
-                        }`}
-                        style={{ 
-                          width: bp.name === 'base' ? '15%' 
-                            : bp.name === 'sm' ? '12%' 
-                            : bp.name === 'md' ? '15%' 
-                            : bp.name === 'lg' ? '15%' 
-                            : bp.name === 'xl' ? '18%' 
-                            : '25%',
-                          backgroundColor: bp.name === 'base' ? '#334155' 
-                            : bp.name === 'sm' ? '#0f766e' 
-                            : bp.name === 'md' ? '#0369a1' 
-                            : bp.name === 'lg' ? '#4f46e5' 
-                            : bp.name === 'xl' ? '#7c3aed' 
-                            : '#be185d'
-                        }}
-                      >
-                        <span className="text-white drop-shadow uppercase">{bp.name}</span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          </section>
+          {/* Section 1: Responsive Breakpoints Display & Interactive Controls */}
+          <BreakpointsSection
+            currentWidth={currentWidth}
+            setCurrentWidth={setCurrentWidth}
+            isSimulating={isSimulating}
+            setIsSimulating={setIsSimulating}
+            activeBreakpoint={activeBreakpoint}
+            isPerformanceOverlayOpen={isPerformanceOverlayOpen}
+            setIsPerformanceOverlayOpen={setIsPerformanceOverlayOpen}
+            dir={settings.dir}
+          />
 
           {/* Section 2: Official Container */}
-          <ContainerVisualizer currentWidth={currentWidth} currentBreakpoint={activeBreakpoint.name} />
+          <ContainerVisualizer currentWidth={currentWidth} currentBreakpoint={activeBreakpoint.name} dir={settings.dir} />
 
           {/* Section 3: Spacing Scale */}
-          <SpacingScale />
+          <SpacingScale dir={settings.dir} />
 
           {/* Section 4 to 7: Typography System */}
-          <TypographySection />
+          <TypographySection dir={settings.dir} />
 
           {/* Section 8 to 10: Effects Section */}
-          <EffectsSection />
+          <EffectsSection dir={settings.dir} />
 
           {/* Section 11: Color Palettes */}
-          <ColorsPalette />
+          <ColorsPalette dir={settings.dir} />
 
           {/* Section 12 to 14: Layout Utilities */}
-          <LayoutUtilities />
+          <LayoutUtilities dir={settings.dir} />
 
           {/* Section 15 to 17: Interactive Playgrounds */}
-          <Playgrounds currentWidth={currentWidth} />
+          <Playgrounds currentWidth={currentWidth} dir={settings.dir} />
 
           {/* Section 18 to 20: Positioning, Z-index & Overflow */}
-          <PositioningZIndex />
+          <PositioningZIndex dir={settings.dir} />
 
           {/* Section 21 & 22: Cheatsheet & Design Tokens */}
-          <Cheatsheet currentBreakpoint={activeBreakpoint.name} currentWidth={currentWidth} />
+          <Cheatsheet currentBreakpoint={activeBreakpoint.name} currentWidth={currentWidth} dir={settings.dir} />
 
         </main>
       </div>
@@ -372,10 +379,17 @@ export default function App() {
       {/* Footer and credentials */}
       <footer className="mt-20 border-t border-zinc-800/60 bg-zinc-950/40 py-8 text-center text-xs text-zinc-500">
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-1">
-            <span>ساخته شده با</span>
+          <div className="flex items-center gap-1.5 justify-center">
+            <span>{settings.dir === 'ltr' ? 'Built with' : 'ساخته شده با'}</span>
             <Heart className="h-3.5 w-3.5 text-rose-500 fill-rose-500 animate-pulse" />
-            <span>و عشق برای <a href="https://derhami.com">جامعه توسعه‌دهندگان وب ایرانی</a></span>
+            <span>
+              {settings.dir === 'ltr' 
+                ? 'for the web developer community by' 
+                : 'برای جامعه توسعه‌دهندگان وب توسط'}{' '}
+              <a href="https://derhami.com" target="_blank" rel="noopener noreferrer" className="text-zinc-300 font-bold hover:text-cyan-400 transition-colors">
+                {settings.dir === 'ltr' ? 'Hamidreza Derhami' : 'حمیدرضا درهمی'}
+              </a>
+            </span>
           </div>
           <div className="font-mono text-[10px]">
             Tailwind Design System Visualizer Pro v1.2.0 • 2026
@@ -387,6 +401,7 @@ export default function App() {
       <GlobalSearch
         isOpen={isSearchOpen}
         onClose={() => setIsSearchOpen(false)}
+        dir={settings.dir}
       />
 
       {/* Visual Settings panel (Section 25) */}
@@ -401,17 +416,39 @@ export default function App() {
       <InspectorOverlay
         isActive={isInspectorActive}
         setIsActive={setIsInspectorActive}
+        dir={settings.dir}
       />
 
       {/* Modern Bottom Navigation & Sections Drawer for Mobile */}
-      <MobileNav
+      {!isSimulatedFrame && (
+        <MobileNav
+          activeSection={activeSection}
+          isSearchOpen={isSearchOpen}
+          setIsSearchOpen={setIsSearchOpen}
+          isSettingsOpen={isSettingsOpen}
+          setIsSettingsOpen={setIsSettingsOpen}
+          isInspectorActive={isInspectorActive}
+          setIsInspectorActive={setIsInspectorActive}
+          dir={settings.dir}
+        />
+      )}
+
+      {/* Real Device Simulator Frame Overlay */}
+      <DeviceSimulatorModal
+        isOpen={isDeviceSimulatorOpen}
+        onClose={() => setIsDeviceSimulatorOpen(false)}
         activeSection={activeSection}
-        isSearchOpen={isSearchOpen}
-        setIsSearchOpen={setIsSearchOpen}
-        isSettingsOpen={isSettingsOpen}
-        setIsSettingsOpen={setIsSettingsOpen}
-        isInspectorActive={isInspectorActive}
-        setIsInspectorActive={setIsInspectorActive}
+        initialWidth={simulatorInitialWidth}
+        dir={settings.dir}
+      />
+
+      {/* Realtime FPS & Render Performance Overlay */}
+      <PerformanceOverlay
+        isVisible={isPerformanceOverlayOpen}
+        onClose={() => setIsPerformanceOverlayOpen(false)}
+        currentWidth={currentWidth}
+        activeBreakpoint={activeBreakpoint.name}
+        dir={settings.dir}
       />
     </div>
   );

@@ -17,9 +17,11 @@ interface InspectorInfo {
 interface InspectorOverlayProps {
   isActive: boolean;
   setIsActive: (act: boolean) => void;
+  dir?: 'rtl' | 'ltr';
 }
 
-export default function InspectorOverlay({ isActive, setIsActive }: InspectorOverlayProps) {
+export default function InspectorOverlay({ isActive, setIsActive, dir = 'rtl' }: InspectorOverlayProps) {
+  const isEn = dir === 'ltr';
   const [info, setInfo] = useState<InspectorInfo | null>(null);
 
   useEffect(() => {
@@ -104,8 +106,8 @@ export default function InspectorOverlay({ isActive, setIsActive }: InspectorOve
 
   return (
     <>
-      {/* Floating activation pill at bottom left */}
-      <div className="fixed bottom-6 left-6 z-50 hidden md:block">
+      {/* Floating activation pill at bottom left or right */}
+      <div className={`fixed bottom-6 ${isEn ? 'right-6' : 'left-6'} z-50 hidden md:block`}>
         <button
           onClick={() => setIsActive(!isActive)}
           className={`flex items-center gap-2 rounded-full px-4 py-2 text-xs font-bold transition-all shadow-xl ${
@@ -115,7 +117,11 @@ export default function InspectorOverlay({ isActive, setIsActive }: InspectorOve
           }`}
         >
           <Eye className="h-4 w-4" />
-          <span>{isActive ? 'بازرس زنده: فعال' : 'فعال‌سازی بازرس کلاسی (Figma Style)'}</span>
+          <span>
+            {isActive 
+              ? (isEn ? 'Live Inspector: Active' : 'بازرس زنده: فعال') 
+              : (isEn ? 'Enable Inspector (Figma Style)' : 'فعال‌سازی بازرس کلاسی (Figma Style)')}
+          </span>
         </button>
       </div>
 
@@ -123,7 +129,7 @@ export default function InspectorOverlay({ isActive, setIsActive }: InspectorOve
       {isActive && info && (
         <div 
           id="inspector-panel"
-          className="absolute z-50 w-64 rounded-xl border border-cyan-500/30 bg-zinc-950/95 p-3 shadow-2xl backdrop-blur-md pointer-events-none text-right font-sans"
+          className={`absolute z-50 w-64 rounded-xl border border-cyan-500/30 bg-zinc-950/95 p-3 shadow-2xl backdrop-blur-md pointer-events-none ${isEn ? 'text-left' : 'text-right'} font-sans`}
           style={{ 
             left: `${Math.min(info.x, window.innerWidth - 280)}px`, 
             top: `${info.y}px` 
@@ -135,40 +141,42 @@ export default function InspectorOverlay({ isActive, setIsActive }: InspectorOve
             </span>
             <div className="flex items-center gap-1 text-[10px] text-zinc-400">
               <Sparkles className="h-3 w-3 text-cyan-400" />
-              <span>مشخصات المان هاور</span>
+              <span>{isEn ? 'Hovered Specs' : 'مشخصات المان هاور'}</span>
             </div>
           </div>
 
           <div className="space-y-1.5 text-[11px]">
             <div className="flex justify-between">
-              <span className="text-zinc-400">ابعاد (W × H):</span>
+              <span className="text-zinc-400">{isEn ? 'Dimensions:' : 'ابعاد (W × H):'}</span>
               <span className="font-mono text-white font-bold">{info.width}px × {info.height}px</span>
             </div>
             
             <div className="flex justify-between">
-              <span className="text-zinc-400">پدینگ (Padding):</span>
+              <span className="text-zinc-400">{isEn ? 'Padding:' : 'پدینگ (Padding):'}</span>
               <span className="font-mono text-rose-400">{info.padding}</span>
             </div>
 
             <div className="flex justify-between">
-              <span className="text-zinc-400">مارجین (Margin):</span>
+              <span className="text-zinc-400">{isEn ? 'Margin:' : 'مارجین (Margin):'}</span>
               <span className="font-mono text-amber-400">{info.margin}</span>
             </div>
 
             <div className="flex justify-between">
-              <span className="text-zinc-400">گوشه (Radius):</span>
+              <span className="text-zinc-400">{isEn ? 'Radius:' : 'گوشه (Radius):'}</span>
               <span className="font-mono text-cyan-400">{info.radius}</span>
             </div>
 
             <div className="flex justify-between">
-              <span className="text-zinc-400">سایز متن:</span>
+              <span className="text-zinc-400">{isEn ? 'Font Size:' : 'سایز متن:'}</span>
               <span className="font-mono text-white">{info.fontSize}</span>
             </div>
 
             {info.classes.length > 0 && (
-              <div className="border-t border-zinc-800/40 pt-2 mt-2 space-y-1 text-right">
-                <span className="text-[10px] text-zinc-500 block">کلاس‌های تیل‌وند رندر شده:</span>
-                <div className="flex flex-wrap gap-1 justify-end">
+              <div className={`border-t border-zinc-800/40 pt-2 mt-2 space-y-1 ${isEn ? 'text-left' : 'text-right'}`}>
+                <span className="text-[10px] text-zinc-500 block">
+                  {isEn ? 'Rendered Tailwind Classes:' : 'کلاس‌های تلویند رندر شده:'}
+                </span>
+                <div className={`flex flex-wrap gap-1 ${isEn ? 'justify-start' : 'justify-end'}`}>
                   {info.classes.map((cls, idx) => (
                     <span key={idx} className="font-mono text-[9px] bg-zinc-900 border border-zinc-800/60 rounded px-1 text-cyan-300">
                       {cls}

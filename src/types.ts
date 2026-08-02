@@ -17,6 +17,7 @@ export interface SearchItem {
   utility: string;
   css: string;
   description: string;
+  descriptionEn?: string;
 }
 
 export interface Settings {
@@ -30,6 +31,8 @@ export interface Settings {
 
 export interface CheatsheetItem {
   title: string;
+  titleEn?: string;
   code: string;
   explanation: string;
+  explanationEn?: string;
 }

@@ -55,71 +55,71 @@ export const SPACING_SCALE = [
 ];
 
 export const TYPOGRAPHY_SCALE = [
-  { name: 'text-xs', size: '0.75rem', px: 12, lh: '1rem (16px)', preview: 'آینده از آن کسانی است که به زیبایی رویاهای خود باور دارند.' },
-  { name: 'text-sm', size: '0.875rem', px: 14, lh: '1.25rem (20px)', preview: 'توسعه‌دهنده خلاق کسی است که کدهای زیبا و بهینه می‌نویسد.' },
-  { name: 'text-base', size: '1rem', px: 16, lh: '1.5rem (24px)', preview: 'این سیستم طراحی با تایپوگرافی زیبا و فونت وزیرمتن آراسته شده است.' },
-  { name: 'text-lg', size: '1.125rem', px: 18, lh: '1.75rem (28px)', preview: 'طراحی عالی یعنی توجه به کوچک‌ترین جزئیات صفحه.' },
-  { name: 'text-xl', size: '1.25rem', px: 20, lh: '1.75rem (28px)', preview: 'انعطاف‌پذیری فوق‌العاده با فریم‌ورک محبوب تیل‌وند.' },
-  { name: 'text-2xl', size: '1.5rem', px: 24, lh: '2rem (32px)', preview: 'طراحی تمیز، ساده و مدرن به سبک محصولات تراز اول جهانی.' },
-  { name: 'text-3xl', size: '1.875rem', px: 30, lh: '2.25rem (36px)', preview: 'بصری‌سازی پویای کامپوننت‌ها و فاصله‌ها.' },
-  { name: 'text-4xl', size: '2.25rem', px: 36, lh: '2.5rem (40px)', preview: 'خلاقیت بی‌پایان در فرانت‌اند.' },
-  { name: 'text-5xl', size: '3rem', px: 48, lh: '1', preview: 'قدرتمند و سریع.' },
-  { name: 'text-6xl', size: '3.75rem', px: 60, lh: '1', preview: 'آیکون‌ها و رنگ‌ها.' },
-  { name: 'text-7xl', size: '4.5rem', px: 72, lh: '1', preview: 'تیل‌وند جی‌اس.' },
-  { name: 'text-8xl', size: '6rem', px: 96, lh: '1', preview: 'دنیای مدرن.' },
-  { name: 'text-9xl', size: '8rem', px: 128, lh: '1', preview: 'آسمان.' }
+  { name: 'text-xs', size: '0.75rem', px: 12, lh: '1rem (16px)', preview: 'آینده از آن کسانی است که به زیبایی رویاهای خود باور دارند.', previewEn: 'The future belongs to those who believe in the beauty of their dreams.' },
+  { name: 'text-sm', size: '0.875rem', px: 14, lh: '1.25rem (20px)', preview: 'توسعه‌دهنده خلاق کسی است که کدهای زیبا و بهینه می‌نویسد.', previewEn: 'A creative developer is one who writes beautiful, performant code.' },
+  { name: 'text-base', size: '1rem', px: 16, lh: '1.5rem (24px)', preview: 'این سیستم طراحی با تایپوگرافی زیبا و فونت وزیرمتن آراسته شده است.', previewEn: 'This design system is styled with high-contrast, clear typography.' },
+  { name: 'text-lg', size: '1.125rem', px: 18, lh: '1.75rem (28px)', preview: 'طراحی عالی یعنی توجه به کوچک‌ترین جزئیات صفحه.', previewEn: 'Great design means paying attention to the smallest page details.' },
+  { name: 'text-xl', size: '1.25rem', px: 20, lh: '1.75rem (28px)', preview: 'انعطاف‌پذیری فوق‌العاده با فریم‌ورک محبوب تلویند.', previewEn: 'Outstanding flexibility powered by the popular Tailwind CSS framework.' },
+  { name: 'text-2xl', size: '1.5rem', px: 24, lh: '2rem (32px)', preview: 'طراحی تمیز، ساده و مدرن به سبک محصولات تراز اول جهانی.', previewEn: 'Clean, simple, and modern interface design for world-class products.' },
+  { name: 'text-3xl', size: '1.875rem', px: 30, lh: '2.25rem (36px)', preview: 'بصری‌سازی پویای کامپوننت‌ها و فاصله‌ها.', previewEn: 'Dynamic visual inspection of components and responsive spacing.' },
+  { name: 'text-4xl', size: '2.25rem', px: 36, lh: '2.5rem (40px)', preview: 'خلاقیت بی‌پایان در فرانت‌اند.', previewEn: 'Endless creativity in modern frontend development.' },
+  { name: 'text-5xl', size: '3rem', px: 48, lh: '1', preview: 'قدرتمند و سریع.', previewEn: 'Powerful and lightning fast.' },
+  { name: 'text-6xl', size: '3.75rem', px: 60, lh: '1', preview: 'آیکون‌ها و رنگ‌ها.', previewEn: 'Icons and vibrant palettes.' },
+  { name: 'text-7xl', size: '4.5rem', px: 72, lh: '1', preview: 'تلویند CSS.', previewEn: 'Tailwind CSS.' },
+  { name: 'text-8xl', size: '6rem', px: 96, lh: '1', preview: 'دنیای مدرن.', previewEn: 'Modern Digital World.' },
+  { name: 'text-9xl', size: '8rem', px: 128, lh: '1', preview: 'آسمان.', previewEn: 'Horizon.' }
 ];
 
 export const FONT_WEIGHTS = [
-  { name: 'font-thin', weight: '100', text: 'Thin / خیلی نازک' },
-  { name: 'font-extralight', weight: '200', text: 'ExtraLight / فوق‌العاده نازک' },
-  { name: 'font-light', weight: '300', text: 'Light / نازک' },
-  { name: 'font-normal', weight: '400', text: 'Normal / معمولی' },
-  { name: 'font-medium', weight: '500', text: 'Medium / متوسط' },
-  { name: 'font-semibold', weight: '600', text: 'Semibold / نیمه‌ضخیم' },
-  { name: 'font-bold', weight: '700', text: 'Bold / ضخیم' },
-  { name: 'font-extrabold', weight: '800', text: 'ExtraBold / خیلی ضخیم' },
-  { name: 'font-black', weight: '900', text: 'Black / ابرضخیم' }
+  { name: 'font-thin', weight: '100', text: 'Thin / خیلی نازک', textEn: 'Thin (100)' },
+  { name: 'font-extralight', weight: '200', text: 'ExtraLight / فوق‌العاده نازک', textEn: 'Extra Light (200)' },
+  { name: 'font-light', weight: '300', text: 'Light / نازک', textEn: 'Light (300)' },
+  { name: 'font-normal', weight: '400', text: 'Normal / معمولی', textEn: 'Normal (400)' },
+  { name: 'font-medium', weight: '500', text: 'Medium / متوسط', textEn: 'Medium (500)' },
+  { name: 'font-semibold', weight: '600', text: 'Semibold / نیمه‌ضخیم', textEn: 'Semibold (600)' },
+  { name: 'font-bold', weight: '700', text: 'Bold / ضخیم', textEn: 'Bold (700)' },
+  { name: 'font-extrabold', weight: '800', text: 'ExtraBold / خیلی ضخیم', textEn: 'Extra Bold (800)' },
+  { name: 'font-black', weight: '900', text: 'Black / ابرضخیم', textEn: 'Black (900)' }
 ];
 
 export const LETTER_SPACING = [
-  { name: 'tracking-tighter', val: '-0.05em', desc: 'بسیار فشرده' },
-  { name: 'tracking-tight', val: '-0.025em', desc: 'فشرده' },
-  { name: 'tracking-normal', val: '0em', desc: 'معمولی' },
-  { name: 'tracking-wide', val: '0.025em', desc: 'باز' },
-  { name: 'tracking-wider', val: '0.05em', desc: 'بسیار باز' },
-  { name: 'tracking-widest', val: '0.1em', desc: 'کاملأ باز (بیشترین فاصله)' }
+  { name: 'tracking-tighter', val: '-0.05em', desc: 'بسیار فشرده', descEn: 'Tighter (-0.05em)' },
+  { name: 'tracking-tight', val: '-0.025em', desc: 'فشرده', descEn: 'Tight (-0.025em)' },
+  { name: 'tracking-normal', val: '0em', desc: 'معمولی', descEn: 'Normal (0em)' },
+  { name: 'tracking-wide', val: '0.025em', desc: 'باز', descEn: 'Wide (0.025em)' },
+  { name: 'tracking-wider', val: '0.05em', desc: 'بسیار باز', descEn: 'Wider (0.05em)' },
+  { name: 'tracking-widest', val: '0.1em', desc: 'کاملأ باز (بیشترین فاصله)', descEn: 'Widest (0.1em)' }
 ];
 
 export const LINE_HEIGHTS = [
-  { name: 'leading-none', val: '1', desc: 'بدون فاصله عمودی اضافه (مناسب عناوین بزرگ)' },
-  { name: 'leading-tight', val: '1.25', desc: 'فاصله‌گذاری فشرده' },
-  { name: 'leading-snug', val: '1.375', desc: 'فاصله‌گذاری نسبتاً فشرده' },
-  { name: 'leading-normal', val: '1.5', desc: 'فاصله‌گذاری استاندارد (مناسب متون بدنه فارسی)' },
-  { name: 'leading-relaxed', val: '1.625', desc: 'فاصله‌گذاری باز و روان' },
-  { name: 'leading-loose', val: '2', desc: 'فاصله‌گذاری کاملاً باز' }
+  { name: 'leading-none', val: '1', desc: 'بدون فاصله عمودی اضافه (مناسب عناوین بزرگ)', descEn: 'No extra vertical leading (suited for large headers)' },
+  { name: 'leading-tight', val: '1.25', desc: 'فاصله‌گذاری فشرده', descEn: 'Tight line spacing' },
+  { name: 'leading-snug', val: '1.375', desc: 'فاصله‌گذاری نسبتاً فشرده', descEn: 'Snug line spacing' },
+  { name: 'leading-normal', val: '1.5', desc: 'فاصله‌گذاری استاندارد (مناسب متون بدنه فارسی)', descEn: 'Standard normal line height' },
+  { name: 'leading-relaxed', val: '1.625', desc: 'فاصله‌گذاری باز و روان', descEn: 'Relaxed line spacing' },
+  { name: 'leading-loose', val: '2', desc: 'فاصله‌گذاری کاملاً باز', descEn: 'Loose line spacing' }
 ];
 
 export const BORDER_RADIUS = [
-  { name: 'rounded-none', val: '0px', desc: 'گوشه کاملا تیز' },
-  { name: 'rounded-sm', val: '2px (0.125rem)', desc: 'گوشه بسیار اندک نرم' },
-  { name: 'rounded', val: '4px (0.25rem)', desc: 'گوشه نرم معمولی' },
-  { name: 'rounded-md', val: '6px (0.375rem)', desc: 'گوشه متوسط استاندارد' },
-  { name: 'rounded-lg', val: '8px (0.5rem)', desc: 'گوشه نرم بزرگ' },
-  { name: 'rounded-xl', val: '12px (0.75rem)', desc: 'گوشه فوق‌العاده نرم' },
-  { name: 'rounded-2xl', val: '16px (1rem)', desc: 'گوشه بسیار نرم مدرن' },
-  { name: 'rounded-3xl', val: '24px (1.5rem)', desc: 'گوشه حبابی دکوراتیو' },
-  { name: 'rounded-full', val: '9999px', desc: 'گوشه کاملا گرد / دایره‌ای' }
+  { name: 'rounded-none', val: '0px', desc: 'گوشه کاملا تیز', descEn: 'Sharp square corners (0px)' },
+  { name: 'rounded-sm', val: '2px (0.125rem)', desc: 'گوشه بسیار اندک نرم', descEn: 'Subtle rounded corners (2px)' },
+  { name: 'rounded', val: '4px (0.25rem)', desc: 'گوشه نرم معمولی', descEn: 'Standard rounded corners (4px)' },
+  { name: 'rounded-md', val: '6px (0.375rem)', desc: 'گوشه متوسط استاندارد', descEn: 'Medium rounded corners (6px)' },
+  { name: 'rounded-lg', val: '8px (0.5rem)', desc: 'گوشه نرم بزرگ', descEn: 'Large rounded corners (8px)' },
+  { name: 'rounded-xl', val: '12px (0.75rem)', desc: 'گوشه فوق‌العاده نرم', descEn: 'Extra large rounded corners (12px)' },
+  { name: 'rounded-2xl', val: '16px (1rem)', desc: 'گوشه بسیار نرم مدرن', descEn: 'Modern soft corners (16px)' },
+  { name: 'rounded-3xl', val: '24px (1.5rem)', desc: 'گوشه حبابی دکوراتیو', descEn: 'Pill decorative corners (24px)' },
+  { name: 'rounded-full', val: '9999px', desc: 'گوشه کاملا گرد / دایره‌ای', descEn: 'Full pill / circular corners' }
 ];
 
 export const SHADOW_SCALE = [
-  { name: 'shadow-sm', val: '0 1px 2px 0 rgb(0 0 0 / 0.05)', desc: 'سایه بسیار خفیف' },
-  { name: 'shadow', val: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)', desc: 'سایه ملایم معمولی' },
-  { name: 'shadow-md', val: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)', desc: 'سایه متوسط' },
-  { name: 'shadow-lg', val: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)', desc: 'سایه عمیق بزرگ' },
-  { name: 'shadow-xl', val: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)', desc: 'سایه بسیار عمیق' },
-  { name: 'shadow-2xl', val: '0 25px 50px -12px rgb(0 0 0 / 0.25)', desc: 'سایه غوطه‌ور کامل' },
-  { name: 'shadow-inner', val: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.06)', desc: 'سایه داخلی (فرورفته)' }
+  { name: 'shadow-sm', val: '0 1px 2px 0 rgb(0 0 0 / 0.05)', desc: 'سایه بسیار خفیف', descEn: 'Subtle light elevation' },
+  { name: 'shadow', val: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)', desc: 'سایه ملایم معمولی', descEn: 'Normal soft shadow' },
+  { name: 'shadow-md', val: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)', desc: 'سایه متوسط', descEn: 'Medium depth shadow' },
+  { name: 'shadow-lg', val: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)', desc: 'سایه عمیق بزرگ', descEn: 'Large deep shadow' },
+  { name: 'shadow-xl', val: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)', desc: 'سایه بسیار عمیق', descEn: 'Extra deep shadow' },
+  { name: 'shadow-2xl', val: '0 25px 50px -12px rgb(0 0 0 / 0.25)', desc: 'سایه غوطه‌ور کامل', descEn: 'Floating high elevation shadow' },
+  { name: 'shadow-inner', val: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.06)', desc: 'سایه داخلی (فرورفته)', descEn: 'Inset recessed shadow' }
 ];
 
 export const OPACITY_SCALE = [
@@ -273,115 +273,129 @@ export const Z_INDEX_SCALE = [
 ];
 
 export const POSITIONS = [
-  { name: 'relative', desc: 'موقعیت نسبی؛ تکیه‌گاهی برای فرزندان با موقعیت مطلق' },
-  { name: 'absolute', desc: 'موقعیت مطلق؛ شناور بر اساس اولین والد موقعیت‌دار' },
-  { name: 'fixed', desc: 'موقعیت ثابت؛ سنجاق شده به پنجره مرورگر بدون جابجایی با اسکرول' },
-  { name: 'sticky', desc: 'موقعیت چسبنده؛ اسکرول می‌شود تا به آستانه برسد، سپس ثابت می‌ماند' }
+  { name: 'relative', val: 'position: relative', desc: 'موقعیت نسبی؛ تکیه‌گاهی برای فرزندان با موقعیت مطلق', descEn: 'Relative positioning; reference frame for absolute children' },
+  { name: 'absolute', val: 'position: absolute', desc: 'موقعیت مطلق؛ شناور بر اساس اولین والد موقعیت‌دار', descEn: 'Absolute positioning; positioned relative to nearest ancestor' },
+  { name: 'fixed', val: 'position: fixed', desc: 'موقعیت ثابت؛ سنجاق شده به پنجره مرورگر بدون جابجایی با اسکرول', descEn: 'Fixed positioning; pinned to browser viewport' },
+  { name: 'sticky', val: 'position: sticky', desc: 'موقعیت چسبنده؛ اسکرول می‌شود تا به آستانه برسد، سپس ثابت می‌ماند', descEn: 'Sticky positioning; toggles relative/fixed based on scroll' }
 ];
 
 export const OVERFLOWS = [
-  { name: 'overflow-hidden', desc: 'پنهان کردن محتوایی که از مرز جعبه خارج می‌شود' },
-  { name: 'overflow-auto', desc: 'نمایش اسکرول‌بار به صورت هوشمند و تنها در صورت نیاز' },
-  { name: 'overflow-scroll', desc: 'اجبار به نمایش همیشگی اسکرول‌بار (عمودی و افقی)' },
-  { name: 'overflow-clip', desc: 'برش قطعی محتوای اضافی بدون امکان ناوبری یا اسکرول داخلی' }
+  { name: 'overflow-hidden', val: 'overflow: hidden', desc: 'پنهان کردن محتوایی که از مرز جعبه خارج می‌شود', descEn: 'Clips overflowing content outside element boundaries' },
+  { name: 'overflow-auto', val: 'overflow: auto', desc: 'نمایش اسکرول‌بار به صورت هوشمند و تنها در صورت نیاز', descEn: 'Automatically adds scrollbars when content overflows' },
+  { name: 'overflow-scroll', val: 'overflow: scroll', desc: 'اجبار به نمایش همیشگی اسکرول‌بار (عمودی و افقی)', descEn: 'Always shows scrollbars regardless of overflow' },
+  { name: 'overflow-clip', val: 'overflow: clip', desc: 'برش قطعی محتوای اضافی بدون امکان ناوبری یا اسکرول داخلی', descEn: 'Strictly clips excess content with zero scroll capability' }
 ];
 
 export const CHEATSHEETS: CheatsheetItem[] = [
   {
     title: 'پدینگ واکنش‌گرا',
+    titleEn: 'Responsive Padding',
     code: 'px-4 md:px-8 py-3 md:py-6',
-    explanation: 'تغییر فواصل داخلی از موبایل تا دسکتاپ برای بهینه‌سازی خوانایی.'
+    explanation: 'تغییر فواصل داخلی از موبایل تا دسکتاپ برای بهینه‌سازی خوانایی.',
+    explanationEn: 'Scale internal spacing between mobile and desktop sizes for optimal readable layouts.'
   },
   {
     title: 'اندازه فونت واکنش‌گرا',
+    titleEn: 'Responsive Typography Scale',
     code: 'text-lg md:text-3xl font-bold',
-    explanation: 'بزرگنمایی پویای عناوین متناسب با عریض‌تر شدن مانیتور.'
+    explanation: 'بزرگنمایی پویای عناوین متناسب با عریض‌تر شدن مانیتور.',
+    explanationEn: 'Dynamically resize heading typography to adapt gracefully on larger displays.'
   },
   {
     title: 'گرید ستونی واکنش‌گرا',
+    titleEn: 'Responsive CSS Grid Columns',
     code: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6',
-    explanation: 'چیدمان چند ستونی عالی که در موبایل تک‌ستون و در دسکتاپ ۴ ستون می‌شود.'
+    explanation: 'چیدمان چند ستونی عالی که در موبایل تک‌ستون و در دسکتاپ ۴ ستون می‌شود.',
+    explanationEn: 'Establish dynamic multi-column grids that transform from 1-column on mobile to 4-columns on desktops.'
   },
   {
     title: 'نمایش انتخابی کامپوننت',
+    titleEn: 'Responsive Visibility',
     code: 'hidden lg:block',
-    explanation: 'پنهان کردن برخی کامپوننت‌های شلوغ یا سایدبارها در موبایل و نمایش در دسکتاپ.'
+    explanation: 'پنهان کردن برخی کامپوننت‌های شلوغ یا سایدبارها در موبایل و نمایش در دسکتاپ.',
+    explanationEn: 'Hide complex or secondary panels on smaller screens and display them on desktop screens.'
   },
   {
     title: 'فلکس واکنش‌گرا',
+    titleEn: 'Responsive Flex Layout Direction',
     code: 'flex flex-col md:flex-row items-center gap-4',
-    explanation: 'مرتب‌سازی زیر هم آیتم‌ها در موبایل و تبدیل آن به ردیف افقی در تبلت/دسکتاپ.'
+    explanation: 'مرتب‌سازی زیر هم آیتم‌ها در موبایل و تبدیل آن به ردیف افقی در تبلت/دسکتاپ.',
+    explanationEn: 'Stack children vertically on mobile viewports and seamlessly align them horizontally on larger screens.'
   },
   {
     title: 'فاصله پویا بین المان‌ها',
+    titleEn: 'Dynamic Spacing Between Items',
     code: 'gap-4 md:gap-8',
-    explanation: 'تنظیم هوشمند فاصله بین کارت‌ها به تناسب فضای خالی نمایشگر.'
+    explanation: 'تنظیم هوشمند فاصله بین کارت‌ها به تناسب فضای خالی نمایشگر.',
+    explanationEn: 'Adjust structural grid/flex gutters dynamically based on screen real estate.'
   },
   {
     title: 'کارت پرمیوم برجسته',
+    titleEn: 'Elevated Premium Card Layout',
     code: 'bg-slate-900 border border-slate-800 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300',
-    explanation: 'ساختار پایه‌ای برای یک کارت بسیار مدرن به سبک داشبوردهای لوکس.'
+    explanation: 'ساختار پایه‌ای برای یک کارت بسیار مدرن به سبک داشبوردهای لوکس.',
+    explanationEn: 'Highly polished premium dashboard layout container featuring subtle borders and elegant hover states.'
   }
 ];
 
 export const SEARCH_ITEMS: SearchItem[] = [
   // Breakpoints
-  { category: 'Responsive Breakpoints', utility: 'sm:', css: 'min-width: 640px', description: 'تغییر ویژگی در عرض‌های بالاتر از ۶۴۰ پیکسل' },
-  { category: 'Responsive Breakpoints', utility: 'md:', css: 'min-width: 768px', description: 'تغییر ویژگی در عرض‌های بالاتر از ۷۶۸ پیکسل' },
-  { category: 'Responsive Breakpoints', utility: 'lg:', css: 'min-width: 1024px', description: 'تغییر ویژگی در عرض‌های بالاتر از ۱۰۲۴ پیکسل' },
-  { category: 'Responsive Breakpoints', utility: 'xl:', css: 'min-width: 1280px', description: 'تغییر ویژگی در عرض‌های بالاتر از ۱۲۸۰ پیکسل' },
-  { category: 'Responsive Breakpoints', utility: '2xl:', css: 'min-width: 1536px', description: 'تغییر ویژگی در عرض‌های بالاتر از ۱۵۳۶ پیکسل' },
+  { category: 'Responsive Breakpoints', utility: 'sm:', css: 'min-width: 640px', description: 'تغییر ویژگی در عرض‌های بالاتر از ۶۴۰ پیکسل', descriptionEn: 'Applies styles at viewport widths of 640px and above' },
+  { category: 'Responsive Breakpoints', utility: 'md:', css: 'min-width: 768px', description: 'تغییر ویژگی در عرض‌های بالاتر از ۷۶۸ پیکسل', descriptionEn: 'Applies styles at viewport widths of 768px and above' },
+  { category: 'Responsive Breakpoints', utility: 'lg:', css: 'min-width: 1024px', description: 'تغییر ویژگی در عرض‌های بالاتر از ۱۰۲۴ پیکسل', descriptionEn: 'Applies styles at viewport widths of 1024px and above' },
+  { category: 'Responsive Breakpoints', utility: 'xl:', css: 'min-width: 1280px', description: 'تغییر ویژگی در عرض‌های بالاتر از ۱۲۸۰ پیکسل', descriptionEn: 'Applies styles at viewport widths of 1280px and above' },
+  { category: 'Responsive Breakpoints', utility: '2xl:', css: 'min-width: 1536px', description: 'تغییر ویژگی در عرض‌های بالاتر از ۱۵۳۶ پیکسل', descriptionEn: 'Applies styles at viewport widths of 1536px and above' },
   
   // Containers
-  { category: 'Containers', utility: 'container', css: 'width: 100%; max-width: dynamic;', description: 'ایجاد کانتینر مرکزی واکنش‌گرا' },
+  { category: 'Containers', utility: 'container', css: 'width: 100%; max-width: dynamic;', description: 'ایجاد کانتینر مرکزی واکنش‌گرا', descriptionEn: 'Creates a centered responsive container with fixed max-widths' },
   
   // Spacing
-  { category: 'Spacing', utility: 'p-0', css: 'padding: 0px', description: 'پدینگ صفر' },
-  { category: 'Spacing', utility: 'p-4', css: 'padding: 16px (1rem)', description: 'پدینگ متوسط از هر چهار جهت' },
-  { category: 'Spacing', utility: 'm-auto', css: 'margin: auto', description: 'فاصله بیرونی خودکار برای وسط‌چین کردن' },
-  { category: 'Spacing', utility: 'gap-4', css: 'gap: 16px', description: 'فاصله‌گذاری مابین المان‌های فلکس یا گرید' },
+  { category: 'Spacing', utility: 'p-0', css: 'padding: 0px', description: 'پدینگ صفر', descriptionEn: 'Zero internal padding' },
+  { category: 'Spacing', utility: 'p-4', css: 'padding: 16px (1rem)', description: 'پدینگ متوسط از هر چهار جهت', descriptionEn: 'Medium internal padding on all sides' },
+  { category: 'Spacing', utility: 'm-auto', css: 'margin: auto', description: 'فاصله بیرونی خودکار برای وسط‌چین کردن', descriptionEn: 'Automatic margin on all sides to center an block element' },
+  { category: 'Spacing', utility: 'gap-4', css: 'gap: 16px', description: 'فاصله‌گذاری مابین المان‌های فلکس یا گرید', descriptionEn: 'Defines spacing (gutters) between grid or flexbox items' },
   
   // Typography
-  { category: 'Typography', utility: 'text-xs', css: 'font-size: 12px; line-height: 16px', description: 'تکست بسیار کوچک' },
-  { category: 'Typography', utility: 'text-sm', css: 'font-size: 14px; line-height: 20px', description: 'تکست کوچک' },
-  { category: 'Typography', utility: 'text-base', css: 'font-size: 16px; line-height: 24px', description: 'تکست معمولی استاندارد' },
-  { category: 'Typography', utility: 'text-lg', css: 'font-size: 18px; line-height: 28px', description: 'تکست کمی بزرگ' },
-  { category: 'Typography', utility: 'text-xl', css: 'font-size: 20px; line-height: 28px', description: 'تکست بزرگ دسکتاپ' },
-  { category: 'Typography', utility: 'text-3xl', css: 'font-size: 30px; line-height: 36px', description: 'تکست بسیار بزرگ برای عناوین' },
+  { category: 'Typography', utility: 'text-xs', css: 'font-size: 12px; line-height: 16px', description: 'تکست بسیار کوچک', descriptionEn: 'Extra small body text' },
+  { category: 'Typography', utility: 'text-sm', css: 'font-size: 14px; line-height: 20px', description: 'تکست کوچک', descriptionEn: 'Small body text' },
+  { category: 'Typography', utility: 'text-base', css: 'font-size: 16px; line-height: 24px', description: 'تکست معمولی استاندارد', descriptionEn: 'Standard baseline body text size' },
+  { category: 'Typography', utility: 'text-lg', css: 'font-size: 18px; line-height: 28px', description: 'تکست کمی بزرگ', descriptionEn: 'Large subtitle or secondary header text' },
+  { category: 'Typography', utility: 'text-xl', css: 'font-size: 20px; line-height: 28px', description: 'تکست بزرگ دسکتاپ', descriptionEn: 'Large desktop subtitle or card header' },
+  { category: 'Typography', utility: 'text-3xl', css: 'font-size: 30px; line-height: 36px', description: 'تکست بسیار بزرگ برای عناوین', descriptionEn: 'Very large heading typography' },
   
   // Fonts
-  { category: 'Typography', utility: 'font-sans', css: 'font-family: ui-sans-serif, system-ui', description: 'فونت sans-serif پیش‌فرض' },
-  { category: 'Typography', utility: 'font-bold', css: 'font-weight: 700', description: 'متن ضخیم' },
-  { category: 'Typography', utility: 'font-medium', css: 'font-weight: 500', description: 'متن متوسط' },
+  { category: 'Typography', utility: 'font-sans', css: 'font-family: ui-sans-serif, system-ui', description: 'فونت sans-serif پیش‌فرض', descriptionEn: 'Default system sans-serif font family stack' },
+  { category: 'Typography', utility: 'font-bold', css: 'font-weight: 700', description: 'متن ضخیم', descriptionEn: 'Bold font weight' },
+  { category: 'Typography', utility: 'font-medium', css: 'font-weight: 500', description: 'متن متوسط', descriptionEn: 'Medium font weight' },
   
   // Shadows
-  { category: 'Shadows', utility: 'shadow-sm', css: 'box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05)', description: 'سایه کوچک' },
-  { category: 'Shadows', utility: 'shadow-md', css: 'box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1)', description: 'سایه متوسط شیک' },
-  { category: 'Shadows', utility: 'shadow-lg', css: 'box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1)', description: 'سایه عمیق بزرگ' },
-  { category: 'Shadows', utility: 'shadow-2xl', css: 'box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25)', description: 'سایه شناوری کامل سه بعدی' },
+  { category: 'Shadows', utility: 'shadow-sm', css: 'box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05)', description: 'سایه کوچک', descriptionEn: 'Subtle outer card shadow' },
+  { category: 'Shadows', utility: 'shadow-md', css: 'box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1)', description: 'سایه متوسط شیک', descriptionEn: 'Elegant medium shadow for card depth' },
+  { category: 'Shadows', utility: 'shadow-lg', css: 'box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1)', description: 'سایه عمیق بزرگ', descriptionEn: 'Deep shadow for dropdowns and flyouts' },
+  { category: 'Shadows', utility: 'shadow-2xl', css: 'box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25)', description: 'سایه شناوری کامل سه بعدی', descriptionEn: 'Heavy prominent shadow for high floating components' },
 
   // Borders
-  { category: 'Borders', utility: 'rounded-none', css: 'border-radius: 0px', description: 'گوشه‌های کاملا تیز' },
-  { category: 'Borders', utility: 'rounded-md', css: 'border-radius: 6px', description: 'گوشه‌های نرم معمولی' },
-  { category: 'Borders', utility: 'rounded-xl', css: 'border-radius: 12px', description: 'گوشه‌های نرم شیک مدرن' },
-  { category: 'Borders', utility: 'rounded-3xl', css: 'border-radius: 24px', description: 'گوشه‌های کاملا گرد حبابی' },
-  { category: 'Borders', utility: 'rounded-full', css: 'border-radius: 9999px', description: 'دایره‌ای کامل' },
+  { category: 'Borders', utility: 'rounded-none', css: 'border-radius: 0px', description: 'گوشه‌های کاملا تیز', descriptionEn: 'Strictly sharp squared corners' },
+  { category: 'Borders', utility: 'rounded-md', css: 'border-radius: 6px', description: 'گوشه‌های نرم معمولی', descriptionEn: 'Standard soft corner radius' },
+  { category: 'Borders', utility: 'rounded-xl', css: 'border-radius: 12px', description: 'گوشه‌های نرم شیک مدرن', descriptionEn: 'Stylish medium rounded corner radius' },
+  { category: 'Borders', utility: 'rounded-3xl', css: 'border-radius: 24px', description: 'گوشه‌های کاملا گرد حبابی', descriptionEn: 'Fully rounded bubble corner radius' },
+  { category: 'Borders', utility: 'rounded-full', css: 'border-radius: 9999px', description: 'دایره‌ای کامل', descriptionEn: 'Pill shape or full circular boundary' },
 
   // Flexbox
-  { category: 'Flexbox', utility: 'flex', css: 'display: flex', description: 'چینش انعطاف‌پذیر به سبک فلکس‌باکس' },
-  { category: 'Flexbox', utility: 'flex-row', css: 'flex-direction: row', description: 'چیدمان افقی آیتم‌ها در یک ردیف' },
-  { category: 'Flexbox', utility: 'flex-col', css: 'flex-direction: column', description: 'چیدمان عمودی آیتم‌ها زیر هم' },
-  { category: 'Flexbox', utility: 'justify-center', css: 'justify-content: center', description: 'وسط‌چین کردن آیتم‌ها در محور اصلی' },
-  { category: 'Flexbox', utility: 'items-center', css: 'align-items: center', description: 'وسط‌چین کردن آیتم‌ها در محور فرعی' },
+  { category: 'Flexbox', utility: 'flex', css: 'display: flex', description: 'چینش انعطاف‌پذیر به سبک فلکس‌باکس', descriptionEn: 'Establishes a flexible block layout container' },
+  { category: 'Flexbox', utility: 'flex-row', css: 'flex-direction: row', description: 'چیدمان افقی آیتم‌ها در یک ردیف', descriptionEn: 'Aligns children horizontally from start to end' },
+  { category: 'Flexbox', utility: 'flex-col', css: 'flex-direction: column', description: 'چیدمان عمودی آیتم‌ها زیر هم', descriptionEn: 'Stacks children vertically from top to bottom' },
+  { category: 'Flexbox', utility: 'justify-center', css: 'justify-content: center', description: 'وسط‌چین کردن آیتم‌ها در محور اصلی', descriptionEn: 'Centers children along the primary flex axis' },
+  { category: 'Flexbox', utility: 'items-center', css: 'align-items: center', description: 'وسط‌چین کردن آیتم‌ها در محور فرعی', descriptionEn: 'Centers children along the cross flex axis' },
 
   // Grid
-  { category: 'Grid', utility: 'grid', css: 'display: grid', description: 'چینش دو بعدی شبکه‌ای' },
-  { category: 'Grid', utility: 'grid-cols-12', css: 'grid-template-columns: repeat(12, minmax(0, 1fr))', description: 'ایجاد شبکه ۱۲ ستونی' },
-  { category: 'Grid', utility: 'col-span-4', css: 'grid-column: span 4 / span 4', description: 'اشغال ۴ ستون از کل شبکه' },
+  { category: 'Grid', utility: 'grid', css: 'display: grid', description: 'چینش دو بعدی شبکه‌ای', descriptionEn: 'Establishes a 2-dimensional grid layout container' },
+  { category: 'Grid', utility: 'grid-cols-12', css: 'grid-template-columns: repeat(12, minmax(0, 1fr))', description: 'ایجاد شبکه ۱۲ ستونی', descriptionEn: 'Creates a standard 12-column grid layout grid template' },
+  { category: 'Grid', utility: 'col-span-4', css: 'grid-column: span 4 / span 4', description: 'اشغال ۴ ستون از کل شبکه', descriptionEn: 'Spans the element across 4 columns of the parent grid' },
 
   // Colors
-  { category: 'Colors', utility: 'bg-slate-900', css: 'background-color: #0f172a', description: 'پس‌زمینه تیره تبلور لوکس' },
-  { category: 'Colors', utility: 'text-emerald-500', css: 'color: #10b981', description: 'متن سبز زمردی فعال یا تایید' },
-  { category: 'Colors', utility: 'text-cyan-400', css: 'color: #22d3ee', description: 'متن آبی فیروزه‌ای پویا' },
-  { category: 'Colors', utility: 'text-amber-500', css: 'color: #f59e0b', description: 'متن زرد کهربایی هشدار یا تایید ثانویه' }
+  { category: 'Colors', utility: 'bg-slate-900', css: 'background-color: #0f172a', description: 'پس‌زمینه تیره تبلور لوکس', descriptionEn: 'Luxurious dark slate background color' },
+  { category: 'Colors', utility: 'text-emerald-500', css: 'color: #10b981', description: 'متن سبز زمردی فعال یا تایید', descriptionEn: 'Emerald green text for active states or success alerts' },
+  { category: 'Colors', utility: 'text-cyan-400', css: 'color: #22d3ee', description: 'متن آبی فیروزه‌ای پویا', descriptionEn: 'Vibrant cyan text for highlight accents' },
+  { category: 'Colors', utility: 'text-amber-500', css: 'color: #f59e0b', description: 'متن زرد کهربایی هشدار یا تایید ثانویه', descriptionEn: 'Amber yellow text for alerts or secondary states' }
 ];

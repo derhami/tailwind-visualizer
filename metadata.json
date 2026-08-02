@@ -1,6 +1,0 @@
-{
-  "name": "Tailwind Design System Visualizer Pro",
-  "description": "سامانه تعاملی و پیشرفته بصری‌سازی سیستم طراحی تلویند به همراه زمین بازی ریسپانسیو، فلکس، گرید، بازرسی کلاسی و جستجوی پیشرفته",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}

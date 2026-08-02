@@ -5,9 +5,11 @@ import { Search, X, Copy, Check, Sparkles } from 'lucide-react';
 interface GlobalSearchProps {
   isOpen: boolean;
   onClose: () => void;
+  dir?: 'rtl' | 'ltr';
 }
 
-export default function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
+export default function GlobalSearch({ isOpen, onClose, dir = 'rtl' }: GlobalSearchProps) {
+  const isEn = dir === 'ltr';
   const [query, setQuery] = useState('');
   const [copiedText, setCopiedText] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -22,8 +24,7 @@ export default function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
         e.preventDefault();
-        if (isOpen) onClose();
-        else onClose(); // wait, toggle
+        onClose();
       }
       if (e.key === 'Escape' && isOpen) {
         onClose();
@@ -37,10 +38,12 @@ export default function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
 
   const filteredItems = SEARCH_ITEMS.filter(item => {
     const q = query.toLowerCase();
+    const descEn = item.descriptionEn || '';
     return (
       item.utility.toLowerCase().includes(q) ||
       item.category.toLowerCase().includes(q) ||
       item.description.toLowerCase().includes(q) ||
+      descEn.toLowerCase().includes(q) ||
       item.css.toLowerCase().includes(q)
     );
   });
@@ -64,10 +67,10 @@ export default function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
           <input
             ref={inputRef}
             type="text"
-            placeholder="کلاس یا مقدار سی‌اس‌اس تیل‌وند را جستجو کنید..."
+            placeholder={isEn ? 'Search Tailwind class or CSS value...' : 'کلاس یا مقدار سی‌اس‌اس تلویند را جستجو کنید...'}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="h-full w-full bg-transparent text-sm text-white placeholder-zinc-500 focus:outline-none text-right"
+            className={`h-full w-full bg-transparent text-sm text-white placeholder-zinc-500 focus:outline-none ${isEn ? 'text-left' : 'text-right'}`}
           />
           <button 
             onClick={onClose}
@@ -82,6 +85,7 @@ export default function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
           {filteredItems.length > 0 ? (
             filteredItems.map((item, i) => {
               const isCopied = copiedText === item.utility;
+              const description = isEn ? (item.descriptionEn || item.description) : item.description;
               return (
                 <div
                   key={i}
@@ -99,9 +103,9 @@ export default function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
                     {item.css}
                   </div>
 
-                  <div className="text-right flex items-center gap-2">
+                  <div className={`${isEn ? 'text-left' : 'text-right'} flex items-center gap-2`}>
                     <span className="text-xs text-zinc-300 group-hover:text-white transition-colors">
-                      {item.description}
+                      {description}
                     </span>
                     <span className="text-zinc-500 shrink-0">
                       {isCopied ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-3.5 w-3.5 opacity-0 group-hover:opacity-100 transition-opacity animate-pulse" />}
@@ -112,7 +116,7 @@ export default function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
             })
           ) : (
             <div className="py-12 text-center text-xs text-zinc-500">
-              هیچ کلاسی یافت نشد. عبارت دیگری را امتحان کنید.
+              {isEn ? 'No classes found. Try another search term.' : 'هیچ کلاسی یافت نشد. عبارت دیگری را امتحان کنید.'}
             </div>
           )}
         </div>
@@ -121,9 +125,9 @@ export default function GlobalSearch({ isOpen, onClose }: GlobalSearchProps) {
         <div className="flex h-10 items-center justify-between border-t border-zinc-800/40 bg-zinc-950 px-4 text-[10px] text-zinc-500 font-mono">
           <div className="flex items-center gap-1">
             <Sparkles className="h-3 w-3 text-cyan-400" />
-            <span>نکته: کلیک روی هر مورد برای کپی کلاس</span>
+            <span>{isEn ? 'Tip: Click any item to copy class' : 'نکته: کلیک روی هر مورد برای کپی کلاس'}</span>
           </div>
-          <span>Esc برای خروج / Ctrl K برای باز کردن</span>
+          <span>{isEn ? 'Esc to close / Ctrl+K to open' : 'Esc برای خروج / Ctrl K برای باز کردن'}</span>
         </div>
       </div>
     </div>

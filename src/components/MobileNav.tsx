@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, Search, Settings, Eye, X, Compass, ChevronLeft } from 'lucide-react';
+import { Search, Settings, Eye, X, Compass, ChevronLeft } from 'lucide-react';
 import { SECTIONS } from './Sidebar';
 
 interface MobileNavProps {
@@ -10,6 +10,7 @@ interface MobileNavProps {
   setIsSettingsOpen: (open: boolean) => void;
   isInspectorActive: boolean;
   setIsInspectorActive: (active: boolean) => void;
+  dir?: 'rtl' | 'ltr';
 }
 
 export default function MobileNav({
@@ -18,17 +19,18 @@ export default function MobileNav({
   setIsSettingsOpen,
   isInspectorActive,
   setIsInspectorActive,
+  dir = 'rtl',
 }: MobileNavProps) {
+  const isEn = dir === 'ltr';
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [filterQuery, setFilterQuery] = useState('');
 
   const handleScrollToSection = (id: string) => {
     setIsDrawerOpen(false);
-    // Give some small delay to let drawer close animation finish slightly
     setTimeout(() => {
       const el = document.getElementById(id);
       if (el) {
-        const headerOffset = 120; // larger offset for mobile navbar + dynamic simulation banner
+        const headerOffset = 120;
         const elementPosition = el.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
         
@@ -40,10 +42,14 @@ export default function MobileNav({
     }, 150);
   };
 
-  const filteredSections = SECTIONS.filter(section => 
-    section.name.toLowerCase().includes(filterQuery.toLowerCase()) ||
-    section.id.toLowerCase().includes(filterQuery.toLowerCase())
-  );
+  const filteredSections = SECTIONS.filter(section => {
+    const q = filterQuery.toLowerCase();
+    const name = isEn ? section.nameEn : section.nameFa;
+    return (
+      name.toLowerCase().includes(q) ||
+      section.id.toLowerCase().includes(q)
+    );
+  });
 
   return (
     <>
@@ -60,7 +66,7 @@ export default function MobileNav({
             }`}
           >
             <Compass className={`h-5 w-5 ${isDrawerOpen ? 'text-cyan-400' : 'text-zinc-400'}`} />
-            <span className="text-[10px] tracking-tight">بخش‌ها</span>
+            <span className="text-[10px] tracking-tight">{isEn ? 'Sections' : 'بخش‌ها'}</span>
           </button>
 
           {/* Search Toggle */}
@@ -69,10 +75,10 @@ export default function MobileNav({
             className="flex flex-col items-center gap-1 py-1 px-3 rounded-xl text-zinc-400 hover:text-white transition-all"
           >
             <Search className="h-5 w-5" />
-            <span className="text-[10px] tracking-tight">جستجو</span>
+            <span className="text-[10px] tracking-tight">{isEn ? 'Search' : 'جستجو'}</span>
           </button>
 
-          {/* Inspector Toggle (Integrated into Bottom Bar) */}
+          {/* Inspector Toggle */}
           <button
             onClick={() => setIsInspectorActive(!isInspectorActive)}
             className={`flex flex-col items-center gap-1 py-1 px-3 rounded-xl transition-all ${
@@ -82,7 +88,7 @@ export default function MobileNav({
             }`}
           >
             <Eye className={`h-5 w-5 ${isInspectorActive ? 'text-emerald-400' : 'text-zinc-400'}`} />
-            <span className="text-[10px] tracking-tight">بازرس کلاسی</span>
+            <span className="text-[10px] tracking-tight">{isEn ? 'Inspector' : 'بازرس کلاسی'}</span>
           </button>
 
           {/* Settings Toggle */}
@@ -91,7 +97,7 @@ export default function MobileNav({
             className="flex flex-col items-center gap-1 py-1 px-3 rounded-xl text-zinc-400 hover:text-white transition-all"
           >
             <Settings className="h-5 w-5" />
-            <span className="text-[10px] tracking-tight">تنظیمات</span>
+            <span className="text-[10px] tracking-tight">{isEn ? 'Settings' : 'تنظیمات'}</span>
           </button>
         </div>
       </div>
@@ -114,9 +120,13 @@ export default function MobileNav({
 
             {/* Drawer Header */}
             <div className="px-5 pb-3 flex items-center justify-between border-b border-zinc-900">
-              <div className="text-right">
-                <h3 className="text-sm font-bold text-white">سامانه ناوبری سریع</h3>
-                <p className="text-[10px] text-zinc-400">انتخاب از بین ۲۲ بخش اصلی سیستم طراحی</p>
+              <div className={isEn ? 'text-left' : 'text-right'}>
+                <h3 className="text-sm font-bold text-white">
+                  {isEn ? 'Quick Navigation' : 'سامانه ناوبری سریع'}
+                </h3>
+                <p className="text-[10px] text-zinc-400">
+                  {isEn ? 'Select from 22 system sections' : 'انتخاب از بین ۲۲ بخش اصلی سیستم طراحی'}
+                </p>
               </div>
               <button 
                 onClick={() => setIsDrawerOpen(false)}
@@ -129,13 +139,15 @@ export default function MobileNav({
             {/* Search Filter input inside drawer */}
             <div className="p-4 bg-zinc-950 border-b border-zinc-900/60">
               <div className="relative">
-                <Search className="absolute right-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
+                <Search className={`absolute ${isEn ? 'left-3.5' : 'right-3.5'} top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500`} />
                 <input
                   type="text"
-                  placeholder="جستجو در بخش‌ها..."
+                  placeholder={isEn ? 'Filter sections...' : 'جستجو در بخش‌ها...'}
                   value={filterQuery}
                   onChange={(e) => setFilterQuery(e.target.value)}
-                  className="w-full bg-zinc-900/50 border border-zinc-800/80 rounded-xl py-2 pr-10 pl-4 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/30 text-right font-sans"
+                  className={`w-full bg-zinc-900/50 border border-zinc-800/80 rounded-xl py-2 ${
+                    isEn ? 'pl-10 pr-4 text-left' : 'pr-10 pl-4 text-right'
+                  } text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/30 font-sans`}
                 />
               </div>
             </div>
@@ -146,27 +158,31 @@ export default function MobileNav({
                 filteredSections.map((section) => {
                   const Icon = section.icon;
                   const isActive = activeSection === section.id;
+                  const sectionName = isEn ? section.nameEn : section.nameFa;
+
                   return (
                     <button
                       key={section.id}
                       onClick={() => handleScrollToSection(section.id)}
-                      className={`w-full flex items-center justify-between rounded-xl p-3 text-right text-xs transition-all ${
+                      className={`w-full flex items-center justify-between rounded-xl p-3 text-xs transition-all ${
+                        isEn ? 'text-left' : 'text-right'
+                      } ${
                         isActive
-                          ? 'bg-gradient-to-r from-cyan-500/15 to-cyan-500/5 text-cyan-400 border-r-2 border-cyan-500 font-bold'
-                          : 'bg-zinc-900/20 text-zinc-400 hover:bg-zinc-900 hover:text-white border-r-2 border-transparent'
+                          ? `bg-gradient-to-r from-cyan-500/15 to-cyan-500/5 text-cyan-400 ${isEn ? 'border-l-2' : 'border-r-2'} border-cyan-500 font-bold`
+                          : `bg-zinc-900/20 text-zinc-400 hover:bg-zinc-900 hover:text-white ${isEn ? 'border-l-2' : 'border-r-2'} border-transparent`
                       }`}
                     >
                       <div className="flex items-center gap-2.5">
                         <Icon className={`h-4 w-4 shrink-0 ${isActive ? 'text-cyan-400' : 'text-zinc-500'}`} />
-                        <span className="truncate">{section.name}</span>
+                        <span className="truncate">{sectionName}</span>
                       </div>
-                      <ChevronLeft className={`h-3.5 w-3.5 transition-transform ${isActive ? 'text-cyan-400 translate-x-0.5' : 'text-zinc-600'}`} />
+                      <ChevronLeft className={`h-3.5 w-3.5 transition-transform ${isEn ? 'rotate-180' : ''} ${isActive ? 'text-cyan-400' : 'text-zinc-600'}`} />
                     </button>
                   );
                 })
               ) : (
                 <div className="text-center py-8 text-xs text-zinc-500">
-                  بخش مورد نظر پیدا نشد.
+                  {isEn ? 'No section found.' : 'بخش مورد نظر پیدا نشد.'}
                 </div>
               )}
             </div>

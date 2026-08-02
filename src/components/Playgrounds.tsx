@@ -1,14 +1,29 @@
 import React, { useState } from 'react';
 import { Code2, Settings, HelpCircle, Check, Copy } from 'lucide-react';
 
-export default function Playgrounds({ currentWidth }: { currentWidth: number }) {
-  const [activeTab, setActiveTab] = useState<'flex' | 'grid' | 'responsive'>('flex');
+interface PlaygroundsProps {
+  currentWidth: number;
+  dir?: 'rtl' | 'ltr';
+}
+
+export default function Playgrounds({ currentWidth, dir = 'rtl' }: PlaygroundsProps) {
+  const isEn = dir === 'ltr';
   const [copiedText, setCopiedText] = useState<string | null>(null);
 
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text);
     setCopiedText(text);
     setTimeout(() => setCopiedText(null), 1500);
+  };
+
+  const scrollToAnchor = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      const headerOffset = 90;
+      const elementPosition = el.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+    }
   };
 
   // --- Flex State ---
@@ -30,7 +45,6 @@ export default function Playgrounds({ currentWidth }: { currentWidth: number }) 
   const [gridMode, setGridMode] = useState<'standard' | 'autofit' | 'autofill'>('standard');
 
   const flexCode = `flex ${flexDirection} ${justifyContent} ${alignItems} ${flexGap}`;
-  const flexChild1Code = `${childGrow} ${childShrink} ${childBasis}`;
 
   const getGridCode = () => {
     if (gridMode === 'autofit') return `grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] ${gridGap}`;
@@ -43,72 +57,61 @@ export default function Playgrounds({ currentWidth }: { currentWidth: number }) 
   };
 
   return (
-    <section id="playgrounds" className="scroll-mt-24 space-y-6">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
-        <div className="flex items-center gap-2">
-          <Code2 className="h-5 w-5 text-indigo-400" />
-          <h2 className="text-lg font-bold text-white">۱۵ تا ۱۷. شهربازی تعاملی چیدمان (Layout Playgrounds)</h2>
+    <div className="space-y-12">
+      {/* SECTION 15: FLEX LAB */}
+      <section id="flex-playground" className="scroll-mt-24 space-y-6">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
+          <div className="flex items-center gap-2">
+            <Code2 className="h-5 w-5 text-indigo-400" />
+            <h2 className="text-lg font-bold text-white">
+              {isEn ? '15. Interactive Flexbox Laboratory (Flex Lab)' : '۱۵. آزمایشگاه تعاملی فلکس‌باکس (Flex Lab)'}
+            </h2>
+          </div>
+
+          <div className="flex items-center gap-1 bg-slate-950/60 border border-white/5 rounded-xl p-1 max-w-full overflow-x-auto shrink-0">
+            <button onClick={() => scrollToAnchor('flex-playground')} className="rounded-lg px-2.5 py-1 text-xs font-bold bg-indigo-600 text-white">
+              {isEn ? 'Flex (15)' : 'فلکس (۱۵)'}
+            </button>
+            <button onClick={() => scrollToAnchor('grid-playground')} className="rounded-lg px-2.5 py-1 text-xs text-slate-400 hover:text-white">
+              {isEn ? 'Grid (16)' : 'گرید (۱۶)'}
+            </button>
+            <button onClick={() => scrollToAnchor('responsive-playground')} className="rounded-lg px-2.5 py-1 text-xs text-slate-400 hover:text-white">
+              {isEn ? 'Responsive (17)' : 'ریسپانسیو (۱۷)'}
+            </button>
+          </div>
         </div>
 
-        {/* Action subtabs */}
-        <div className="flex items-center gap-1 bg-slate-950/60 border border-white/5 rounded-xl p-1 max-w-full overflow-x-auto shrink-0">
-          <button
-            onClick={() => setActiveTab('flex')}
-            className={`rounded-lg px-3.5 py-1 text-xs font-semibold transition-all ${
-              activeTab === 'flex' ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white'
-            }`}
-          >
-            فلکس‌باکس (Flex)
-          </button>
-          <button
-            onClick={() => setActiveTab('grid')}
-            className={`rounded-lg px-3.5 py-1 text-xs font-semibold transition-all ${
-              activeTab === 'grid' ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white'
-            }`}
-          >
-            گرید (Grid)
-          </button>
-          <button
-            onClick={() => setActiveTab('responsive')}
-            className={`rounded-lg px-3.5 py-1 text-xs font-semibold transition-all ${
-              activeTab === 'responsive' ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white'
-            }`}
-          >
-            ریسپانسیو (Responsive)
-          </button>
-        </div>
-      </div>
-
-      {/* 1. FLEX PLAYGROUND */}
-      {activeTab === 'flex' && (
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-          {/* Controls side */}
           <div className="glass-panel rounded-2xl p-5 space-y-5">
-            <h3 className="text-xs font-bold text-slate-400 tracking-wider">تنظیمات تراز و ردیف فلکس</h3>
+            <h3 className="text-xs font-bold text-slate-400 tracking-wider">
+              {isEn ? 'Flex Controls & Alignment' : 'تنظیمات تراز و ردیف فلکس'}
+            </h3>
             
-            {/* Flex Direction */}
             <div className="space-y-1.5">
-              <label className="text-[11px] text-slate-400">جهت چینش (flex-direction)</label>
+              <label className="text-[11px] text-slate-400">
+                {isEn ? 'Flex Direction (flex-direction)' : 'جهت چینش (flex-direction)'}
+              </label>
               <div className="grid grid-cols-2 gap-1.5">
-                {(['flex-row', 'flex-row-reverse', 'flex-col', 'flex-col-reverse'] as const).map((dir) => (
+                {(['flex-row', 'flex-row-reverse', 'flex-col', 'flex-col-reverse'] as const).map((dirVal) => (
                   <button
-                    key={dir}
-                    onClick={() => setFlexDirection(dir)}
+                    key={dirVal}
+                    onClick={() => setFlexDirection(dirVal)}
                     className={`rounded-lg py-1.5 text-[10px] font-mono font-bold border transition-all ${
-                      flexDirection === dir 
+                      flexDirection === dirVal 
                         ? 'bg-indigo-500/10 border-indigo-500 text-indigo-300' 
                         : 'bg-slate-950/20 border-white/5 text-slate-400 hover:text-white'
                     }`}
                   >
-                    {dir}
+                    {dirVal}
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Justify Content */}
             <div className="space-y-1.5">
-              <label className="text-[11px] text-slate-400">تراز اصلی (justify-content)</label>
+              <label className="text-[11px] text-slate-400">
+                {isEn ? 'Justify Content (justify-content)' : 'تراز اصلی (justify-content)'}
+              </label>
               <div className="grid grid-cols-2 gap-1.5">
                 {(['justify-start', 'justify-end', 'justify-center', 'justify-between', 'justify-around', 'justify-evenly'] as const).map((just) => (
                   <button
@@ -126,9 +129,10 @@ export default function Playgrounds({ currentWidth }: { currentWidth: number }) 
               </div>
             </div>
 
-            {/* Align Items */}
             <div className="space-y-1.5">
-              <label className="text-[11px] text-slate-400">تراز فرعی (align-items)</label>
+              <label className="text-[11px] text-slate-400">
+                {isEn ? 'Align Items (align-items)' : 'تراز فرعی (align-items)'}
+              </label>
               <div className="grid grid-cols-2 gap-1.5">
                 {(['items-start', 'items-end', 'items-center', 'items-baseline', 'items-stretch'] as const).map((item) => (
                   <button
@@ -146,15 +150,16 @@ export default function Playgrounds({ currentWidth }: { currentWidth: number }) 
               </div>
             </div>
 
-            {/* Flex Gap */}
             <div className="space-y-1.5">
-              <label className="text-[11px] text-slate-400">فاصله میانی (gap)</label>
+              <label className="text-[11px] text-slate-400">
+                {isEn ? 'Gap between items (gap)' : 'فاصله بین آیتم‌ها (gap)'}
+              </label>
               <div className="grid grid-cols-5 gap-1">
                 {(['gap-0', 'gap-2', 'gap-4', 'gap-6', 'gap-8'] as const).map((g) => (
                   <button
                     key={g}
                     onClick={() => setFlexGap(g)}
-                    className={`rounded-lg py-1.5 text-[10px] font-mono border transition-all ${
+                    className={`rounded py-1 text-[10px] font-mono border transition-all ${
                       flexGap === g 
                         ? 'bg-indigo-500/10 border-indigo-500 text-indigo-300 font-bold' 
                         : 'bg-slate-950/20 border-white/5 text-slate-400 hover:text-white'
@@ -165,78 +170,15 @@ export default function Playgrounds({ currentWidth }: { currentWidth: number }) 
                 ))}
               </div>
             </div>
-
-            <div className="h-px bg-white/10" />
-
-            {/* Flex Item 1 Specific Control */}
-            <div className="space-y-2">
-              <h4 className="text-[11px] font-bold text-slate-400">تنظیمات اختصاصی آیتم ۱ (آبی)</h4>
-              
-              <div className="grid grid-cols-2 gap-2 text-[10px]">
-                {/* Grow */}
-                <div className="space-y-1">
-                  <span className="text-slate-500">رشد (grow)</span>
-                  <div className="flex gap-1">
-                    {['grow', 'grow-0'].map((g) => (
-                      <button
-                        key={g}
-                        onClick={() => setChildGrow(g as any)}
-                        className={`flex-1 rounded p-1 border text-center font-mono ${
-                          childGrow === g ? 'bg-cyan-500/10 border-cyan-500 text-cyan-300 font-bold' : 'bg-slate-950/20 border-white/5 text-slate-500'
-                        }`}
-                      >
-                        {g}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Shrink */}
-                <div className="space-y-1">
-                  <span className="text-slate-500">انقباض (shrink)</span>
-                  <div className="flex gap-1">
-                    {['shrink', 'shrink-0'].map((s) => (
-                      <button
-                        key={s}
-                        onClick={() => setChildShrink(s as any)}
-                        className={`flex-1 rounded p-1 border text-center font-mono ${
-                          childShrink === s ? 'bg-cyan-500/10 border-cyan-500 text-cyan-300 font-bold' : 'bg-slate-950/20 border-white/5 text-slate-500'
-                        }`}
-                      >
-                        {s}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Basis */}
-              <div className="space-y-1">
-                <span className="text-[10px] text-slate-500 block">پایه حجم (flex-basis)</span>
-                <div className="flex gap-1">
-                  {['basis-auto', 'basis-1/4', 'basis-1/2'].map((b) => (
-                    <button
-                      key={b}
-                      onClick={() => setChildBasis(b as any)}
-                      className={`flex-1 rounded p-1 border text-center font-mono text-[10px] ${
-                        childBasis === b ? 'bg-cyan-500/10 border-cyan-500 text-cyan-300' : 'bg-slate-950/20 border-white/5 text-slate-500'
-                      }`}
-                    >
-                      {b}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
           </div>
 
-          {/* Visual Canvas side */}
           <div className="xl:col-span-2 flex flex-col justify-between glass-panel rounded-2xl p-5 min-h-[400px]">
             <div>
               <div className="flex items-center justify-between border-b border-white/5 pb-2 mb-4">
-                <span className="text-xs font-bold text-slate-400">صفحه زنده پیش‌نمایش فلکس</span>
+                <span className="text-xs font-bold text-slate-400">
+                  {isEn ? 'Live Flexbox Preview' : 'پیش‌نمایش زنده فلکس‌باکس'}
+                </span>
                 
-                {/* Live copy class */}
                 <button
                   onClick={() => handleCopy(flexCode)}
                   className="flex items-center gap-1.5 rounded-lg bg-slate-950 px-3 py-1 text-xs text-indigo-300 border border-white/5 hover:border-white/15"
@@ -246,97 +188,85 @@ export default function Playgrounds({ currentWidth }: { currentWidth: number }) 
                 </button>
               </div>
 
-              {/* Flex Container Canvas */}
-              <div 
-                className={`bg-slate-950/40 border border-dashed border-white/10 rounded-xl p-4 min-h-[250px] flex ${flexDirection} ${justifyContent} ${alignItems} ${flexGap} max-w-full overflow-x-auto`}
-              >
-                {/* Item 1 - Custom parameters */}
-                <div className={`rounded-lg bg-indigo-500/15 border-2 border-indigo-400 p-4 min-h-[60px] min-w-[60px] flex flex-col justify-center items-center text-center ${childGrow} ${childShrink} ${childBasis}`}>
-                  <span className="text-xs font-bold text-indigo-300">۱ (سفارشی)</span>
-                  <span className="text-[8px] font-mono text-slate-400 mt-1 block leading-3">{flexChild1Code}</span>
+              <div className={`bg-slate-950/40 border border-dashed border-white/10 rounded-xl p-4 min-h-[250px] flex ${flexDirection} ${justifyContent} ${alignItems} ${flexGap} transition-all duration-300`}>
+                <div className={`rounded-lg bg-indigo-500/15 border border-indigo-400 p-4 flex flex-col items-center justify-center text-xs font-bold text-indigo-300 ${childGrow} ${childShrink} ${childBasis}`}>
+                  {isEn ? 'Item 1' : 'آیتم ۱'}
                 </div>
-
-                <div className="rounded-lg bg-emerald-500/10 border border-emerald-500/20 p-4 h-16 w-16 flex items-center justify-center text-xs font-bold text-emerald-300">
-                  ۲
+                <div className="rounded-lg bg-emerald-500/15 border border-emerald-400 p-4 flex flex-col items-center justify-center text-xs font-bold text-emerald-300">
+                  {isEn ? 'Item 2' : 'آیتم ۲'}
                 </div>
-
-                <div className="rounded-lg bg-purple-500/10 border border-purple-500/20 p-4 h-12 w-12 flex items-center justify-center text-xs font-bold text-purple-300">
-                  ۳
-                </div>
-
-                <div className="rounded-lg bg-amber-500/10 border border-amber-500/20 p-4 h-20 w-14 flex items-center justify-center text-xs font-bold text-amber-300">
-                  ۴
+                <div className="rounded-lg bg-purple-500/15 border border-purple-400 p-4 flex flex-col items-center justify-center text-xs font-bold text-purple-300">
+                  {isEn ? 'Item 3' : 'آیتم ۳'}
                 </div>
               </div>
             </div>
 
             <div className="text-[10px] text-slate-500 bg-slate-950/30 p-2.5 rounded-lg leading-5 mt-4">
-              <strong>راهنما:</strong> در فلکس‌باکس، آیتم‌ها روی یک جهت اصلی (ردیف یا ستون) توزیع می‌شوند. با تغییر جهت، <code className="text-indigo-400 font-mono">justify-content</code> محور اصلی و <code className="text-indigo-400 font-mono">align-items</code> محور فرعی ترازدهی را کنترل می‌کنند.
+              <strong>{isEn ? 'Tip:' : 'نکته:'}</strong> {isEn 
+                ? 'Use justify-content for primary axis alignment and align-items for cross axis alignment.' 
+                : 'برای همراستاسازی بهتر المان‌ها، از ترکیب تراز اصلی (justify) برای محور افقی و تراز فرعی (items) برای محور عمودی استفاده کنید.'}
             </div>
           </div>
         </div>
-      )}
+      </section>
 
-      {/* 2. GRID PLAYGROUND */}
-      {activeTab === 'grid' && (
+      {/* SECTION 16: GRID LAB */}
+      <section id="grid-playground" className="scroll-mt-24 space-y-6">
+        <div className="border-b border-white/10 pb-3">
+          <h2 className="text-lg font-bold text-white">
+            {isEn ? '16. Interactive 2D Grid Laboratory (Grid Lab)' : '۱۶. آزمایشگاه تعاملی گرید دو بعدی (Grid Lab)'}
+          </h2>
+        </div>
+
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-          {/* Controls side */}
           <div className="glass-panel rounded-2xl p-5 space-y-5">
-            <h3 className="text-xs font-bold text-slate-400 tracking-wider">تنظیمات ستون‌های گرید</h3>
-            
-            {/* Grid Modes */}
+            <h3 className="text-xs font-bold text-slate-400 tracking-wider">
+              {isEn ? 'Grid & Column Controls' : 'تنظیمات گرید و ستون‌ها'}
+            </h3>
+
             <div className="space-y-1.5">
-              <label className="text-[11px] text-slate-400">حالت چیدمان</label>
+              <label className="text-[11px] text-slate-400">{isEn ? 'Grid Layout Mode' : 'حالت چیدمان شبکه'}</label>
               <div className="grid grid-cols-3 gap-1">
-                {[
-                  { id: 'standard', name: 'استاندارد' },
-                  { id: 'autofit', name: 'Auto Fit' },
-                  { id: 'autofill', name: 'Auto Fill' }
-                ].map((mode) => (
+                {(['standard', 'autofit', 'autofill'] as const).map((mode) => (
                   <button
-                    key={mode.id}
-                    onClick={() => setGridMode(mode.id as any)}
-                    className={`rounded-lg py-1.5 text-[10px] font-semibold border transition-all ${
-                      gridMode === mode.id 
-                        ? 'bg-indigo-500/10 border-indigo-500 text-indigo-300' 
+                    key={mode}
+                    onClick={() => setGridMode(mode)}
+                    className={`rounded py-1 text-[10px] border transition-all ${
+                      gridMode === mode 
+                        ? 'bg-indigo-500/10 border-indigo-500 text-indigo-300 font-bold' 
                         : 'bg-slate-950/20 border-white/5 text-slate-400 hover:text-white'
                     }`}
                   >
-                    {mode.name}
+                    {mode === 'standard' ? (isEn ? 'Fixed' : 'ثابت') : mode === 'autofit' ? 'Auto-Fit' : 'Auto-Fill'}
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Columns Slider (Only visible in standard mode) */}
             {gridMode === 'standard' && (
               <div className="space-y-1.5">
-                <div className="flex items-center justify-between text-[11px] text-slate-400">
-                  <span>تعداد ستون‌ها (grid-cols-*)</span>
-                  <span className="font-mono text-indigo-300 font-bold">{gridCols} ستون</span>
-                </div>
+                <label className="text-[11px] text-slate-400">{isEn ? `Columns Count (cols: ${gridCols})` : `تعداد ستون‌ها (cols: ${gridCols})`}</label>
                 <input 
                   type="range" 
                   min="1" 
                   max="12" 
                   value={gridCols} 
                   onChange={(e) => setGridCols(parseInt(e.target.value))}
-                  className="w-full accent-indigo-500"
+                  className="w-full accent-indigo-500 bg-slate-900 rounded-lg cursor-pointer"
                 />
               </div>
             )}
 
-            {/* Grid Gap */}
             <div className="space-y-1.5">
-              <label className="text-[11px] text-slate-400">فاصله میانی (gap)</label>
+              <label className="text-[11px] text-slate-400">{isEn ? 'Gap' : 'فاصله (gap)'}</label>
               <div className="grid grid-cols-5 gap-1">
                 {(['gap-0', 'gap-2', 'gap-4', 'gap-6', 'gap-8'] as const).map((g) => (
                   <button
                     key={g}
                     onClick={() => setGridGap(g)}
-                    className={`rounded-lg py-1.5 text-[10px] font-mono border transition-all ${
+                    className={`rounded py-1 text-[10px] font-mono border transition-all ${
                       gridGap === g 
-                        ? 'bg-indigo-500/10 border-indigo-500 text-indigo-300' 
+                        ? 'bg-indigo-500/10 border-indigo-500 text-indigo-300 font-bold' 
                         : 'bg-slate-950/20 border-white/5 text-slate-400 hover:text-white'
                     }`}
                   >
@@ -346,16 +276,12 @@ export default function Playgrounds({ currentWidth }: { currentWidth: number }) 
               </div>
             </div>
 
-            <div className="h-px bg-white/10" />
-
-            {/* Item 1 custom dimensions inside grid */}
-            <div className="space-y-3">
-              <h4 className="text-[11px] font-bold text-slate-400">تنظیمات ابعاد کارت ۱ (آبی)</h4>
+            <div className="space-y-3 pt-2 border-t border-white/5">
+              <h4 className="text-[11px] font-bold text-slate-400">{isEn ? 'Card 1 Custom Span Settings' : 'تنظیمات ابعاد کارت ۱ (آبی)'}</h4>
               
               <div className="grid grid-cols-2 gap-2 text-[10px]">
-                {/* Column Span */}
                 <div className="space-y-1">
-                  <span className="text-slate-500 block">عرض ستونی (span)</span>
+                  <span className="text-slate-500 block">{isEn ? 'Column Span' : 'عرض ستونی (span)'}</span>
                   <select 
                     value={item1ColSpan} 
                     onChange={(e) => setItem1ColSpan(parseInt(e.target.value))}
@@ -365,9 +291,8 @@ export default function Playgrounds({ currentWidth }: { currentWidth: number }) 
                   </select>
                 </div>
 
-                {/* Row Span */}
                 <div className="space-y-1">
-                  <span className="text-slate-500 block">ارتفاع ردیفی (span)</span>
+                  <span className="text-slate-500 block">{isEn ? 'Row Span' : 'ارتفاع ردیفی (span)'}</span>
                   <select 
                     value={item1RowSpan} 
                     onChange={(e) => setItem1RowSpan(parseInt(e.target.value))}
@@ -380,13 +305,11 @@ export default function Playgrounds({ currentWidth }: { currentWidth: number }) 
             </div>
           </div>
 
-          {/* Visual Canvas side */}
           <div className="xl:col-span-2 flex flex-col justify-between glass-panel rounded-2xl p-5 min-h-[400px]">
             <div>
               <div className="flex items-center justify-between border-b border-white/5 pb-2 mb-4">
-                <span className="text-xs font-bold text-slate-400">صفحه زنده پیش‌نمایش گرید دو بعدی</span>
+                <span className="text-xs font-bold text-slate-400">{isEn ? 'Live 2D Grid Preview' : 'پیش‌نمایش شبکه گرید ۲ بعدی'}</span>
                 
-                {/* Copy helper */}
                 <button
                   onClick={() => handleCopy(getGridCode())}
                   className="flex items-center gap-1.5 rounded-lg bg-slate-950 px-3 py-1 text-xs text-indigo-300 border border-white/5 hover:border-white/15"
@@ -396,7 +319,6 @@ export default function Playgrounds({ currentWidth }: { currentWidth: number }) 
                 </button>
               </div>
 
-              {/* Dynamic Grid Element */}
                <div 
                 className={`bg-slate-950/40 border border-dashed border-white/10 rounded-xl p-4 min-h-[250px] grid ${gridGap} max-w-full overflow-x-auto`}
                 style={{ 
@@ -405,7 +327,6 @@ export default function Playgrounds({ currentWidth }: { currentWidth: number }) 
                     : `repeat(${gridCols}, minmax(0, 1fr))`
                 }}
               >
-                {/* Card 1 with custom properties */}
                 <div 
                   className="rounded-lg bg-indigo-500/15 border-2 border-indigo-400 p-4 flex flex-col items-center justify-center text-center text-xs font-bold text-indigo-300"
                   style={{ 
@@ -413,89 +334,86 @@ export default function Playgrounds({ currentWidth }: { currentWidth: number }) 
                     gridRow: `span ${item1RowSpan} / span ${item1RowSpan}`
                   }}
                 >
-                  <div>کارت ۱ (سفارشی)</div>
+                  <div>{isEn ? 'Card 1 (Custom)' : 'کارت ۱ (سفارشی)'}</div>
                   <div className="text-[9px] font-mono text-slate-400 mt-1">{getGridItem1Code()}</div>
                 </div>
 
-                <div className="rounded-lg bg-emerald-500/10 border border-emerald-500/20 p-4 min-h-[60px] flex items-center justify-center text-xs font-bold text-emerald-300">کارت ۲</div>
-                <div className="rounded-lg bg-purple-500/10 border border-purple-500/20 p-4 min-h-[60px] flex items-center justify-center text-xs font-bold text-purple-300">کارت ۳</div>
-                <div className="rounded-lg bg-amber-500/10 border border-amber-500/20 p-4 min-h-[60px] flex items-center justify-center text-xs font-bold text-amber-300">کارت ۴</div>
-                <div className="rounded-lg bg-cyan-500/10 border border-cyan-500/20 p-4 min-h-[60px] flex items-center justify-center text-xs font-bold text-cyan-300">کارت ۵</div>
-                <div className="rounded-lg bg-rose-500/10 border border-rose-500/20 p-4 min-h-[60px] flex items-center justify-center text-xs font-bold text-rose-300">کارت ۶</div>
-                <div className="rounded-lg bg-teal-500/10 border border-teal-500/20 p-4 min-h-[60px] flex items-center justify-center text-xs font-bold text-teal-300">کارت ۷</div>
+                <div className="rounded-lg bg-emerald-500/10 border border-emerald-500/20 p-4 min-h-[60px] flex items-center justify-center text-xs font-bold text-emerald-300">{isEn ? 'Card 2' : 'کارت ۲'}</div>
+                <div className="rounded-lg bg-purple-500/10 border border-purple-500/20 p-4 min-h-[60px] flex items-center justify-center text-xs font-bold text-purple-300">{isEn ? 'Card 3' : 'کارت ۳'}</div>
+                <div className="rounded-lg bg-amber-500/10 border border-amber-500/20 p-4 min-h-[60px] flex items-center justify-center text-xs font-bold text-amber-300">{isEn ? 'Card 4' : 'کارت ۴'}</div>
+                <div className="rounded-lg bg-cyan-500/10 border border-cyan-500/20 p-4 min-h-[60px] flex items-center justify-center text-xs font-bold text-cyan-300">{isEn ? 'Card 5' : 'کارت ۵'}</div>
+                <div className="rounded-lg bg-rose-500/10 border border-rose-500/20 p-4 min-h-[60px] flex items-center justify-center text-xs font-bold text-rose-300">{isEn ? 'Card 6' : 'کارت ۶'}</div>
+                <div className="rounded-lg bg-teal-500/10 border border-teal-500/20 p-4 min-h-[60px] flex items-center justify-center text-xs font-bold text-teal-300">{isEn ? 'Card 7' : 'کارت ۷'}</div>
               </div>
-            </div>
-
-            <div className="text-[10px] text-slate-500 bg-slate-950/30 p-2.5 rounded-lg leading-5 mt-4">
-              <strong>راهنما:</strong> چیدمان شبکه (Grid) یک سیستم دو بعدی بسیار منعطف است. حالت‌های <code className="text-indigo-400 font-mono">auto-fit</code> و <code className="text-indigo-400 font-mono">auto-fill</code> به شما اجازه می‌دهند بدون کلاس‌های پیچیده، چیدمان‌هایی کاملا خودکار و پاسخگو بر اساس کوچک‌ترین عرض کارت‌ها ایجاد کنید.
             </div>
           </div>
         </div>
-      )}
+      </section>
 
-      {/* 3. RESPONSIVE PLAYGROUND */}
-      {activeTab === 'responsive' && (
+      {/* SECTION 17: RESPONSIVE LAB */}
+      <section id="responsive-playground" className="scroll-mt-24 space-y-6">
+        <div className="border-b border-white/10 pb-3">
+          <h2 className="text-lg font-bold text-white">
+            {isEn ? '17. Responsive Class Simulator Across Breakpoints' : '۱۷. آزمایشگاه شبیه‌ساز کلاس‌های واکنش‌گرا'}
+          </h2>
+        </div>
+
         <div className="glass-panel rounded-2xl p-6 space-y-4">
-          <div className="flex items-center justify-between border-b border-white/5 pb-2">
-            <h3 className="text-sm font-bold text-indigo-400">۱۷. شبیه‌ساز واکنش‌گرایی کلاس‌ها در تمام Breakpointها</h3>
-            <span className="text-[11px] text-slate-400">هاور روی هر کارت به شما نشان می‌دهد چطور کلاس‌ها تغییر رفتار می‌دهند.</span>
-          </div>
-
           <p className="text-xs text-slate-400 leading-6">
-            کارت‌های زیر شامل کلاس‌های تغییر حالت هستند. با تغییر عرض مانیتور، حالت‌های فعال روشن و موارد غیرفعال خاموش می‌شوند. عرض فعلی نمایشی: <strong className="text-cyan-400">{Math.round(currentWidth)}px</strong>
+            {isEn
+              ? `The cards below contain responsive modifier classes. Resize your browser to observe active states toggle live. Current viewport width: `
+              : `کارت‌های زیر شامل کلاس‌های تغییر حالت هستند. با تغییر عرض مانیتور، حالت‌های فعال روشن و موارد غیرفعال خاموش می‌شوند. عرض فعلی نمایشی: `}
+            <strong className="text-cyan-400">{Math.round(currentWidth)}px</strong>
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mt-4">
-            {/* Card 1: hidden on mobile, block on lg */}
             <div className="p-4 rounded-xl bg-slate-950/30 border border-white/5 relative overflow-hidden flex flex-col justify-between min-h-[140px]">
               <div>
                 <span className="text-[10px] text-slate-500 font-bold font-mono">CASE 1: hidden lg:block</span>
-                <h4 className="text-sm font-bold text-white mt-1">پنهان‌سازی مشروط سایدبار</h4>
+                <h4 className="text-sm font-bold text-white mt-1">{isEn ? 'Conditional Sidebar Visibility' : 'پنهان‌سازی مشروط سایدبار'}</h4>
               </div>
               <div className="flex items-center justify-between gap-2 mt-4">
                 <span className={`text-[11px] font-bold rounded px-2 py-0.5 ${currentWidth < 1024 ? 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/30' : 'bg-slate-900 text-slate-500'}`}>
-                  hidden (موبایل و تبلت)
+                  {isEn ? 'hidden (mobile/tablet)' : 'hidden (موبایل و تبلت)'}
                 </span>
                 <span className={`text-[11px] font-bold rounded px-2 py-0.5 ${currentWidth >= 1024 ? 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/30' : 'bg-slate-900 text-slate-500'}`}>
-                  lg:block (دسکتاپ)
+                  {isEn ? 'lg:block (desktop)' : 'lg:block (دسکتاپ)'}
                 </span>
               </div>
             </div>
 
-            {/* Card 2: flex layout change */}
             <div className="p-4 rounded-xl bg-slate-950/30 border border-white/5 relative overflow-hidden flex flex-col justify-between min-h-[140px]">
               <div>
                 <span className="text-[10px] text-slate-500 font-bold font-mono">CASE 2: flex flex-col md:flex-row</span>
-                <h4 className="text-sm font-bold text-white mt-1">تغییر توزیع ستونی به ردیفی</h4>
+                <h4 className="text-sm font-bold text-white mt-1">{isEn ? 'Column to Row Layout Switch' : 'تغییر توزیع ستونی به ردیفی'}</h4>
               </div>
               <div className="flex items-center justify-between gap-2 mt-4">
                 <span className={`text-[11px] font-bold rounded px-2 py-0.5 ${currentWidth < 768 ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'bg-slate-900 text-slate-500'}`}>
-                  flex-col زیر هم
+                  {isEn ? 'flex-col (stacked)' : 'flex-col زیر هم'}
                 </span>
                 <span className={`text-[11px] font-bold rounded px-2 py-0.5 ${currentWidth >= 768 ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'bg-slate-900 text-slate-500'}`}>
-                  md:flex-row کنار هم
+                  {isEn ? 'md:flex-row (side by side)' : 'md:flex-row کنار هم'}
                 </span>
               </div>
             </div>
 
-            {/* Card 3: grid responsive changes */}
             <div className="p-4 rounded-xl bg-slate-950/30 border border-white/5 relative overflow-hidden flex flex-col justify-between min-h-[140px]">
               <div>
                 <span className="text-[10px] text-slate-500 font-bold font-mono">CASE 3: text-sm md:text-2xl</span>
-                <h4 className="text-sm font-bold text-white mt-1">اندازه متن واکنش‌گرا</h4>
+                <h4 className="text-sm font-bold text-white mt-1">{isEn ? 'Responsive Typography Scale' : 'اندازه متن واکنش‌گرا'}</h4>
               </div>
               <div className="flex items-center justify-between gap-2 mt-4">
                 <span className={`text-[11px] font-bold rounded px-2 py-0.5 ${currentWidth < 768 ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' : 'bg-slate-900 text-slate-500'}`}>
-                  text-sm (کوچک)
+                  {isEn ? 'text-sm (small)' : 'text-sm (کوچک)'}
                 </span>
                 <span className={`text-[11px] font-bold rounded px-2 py-0.5 ${currentWidth >= 768 ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' : 'bg-slate-900 text-slate-500'}`}>
-                  md:text-2xl (بزرگ)
+                  {isEn ? 'md:text-2xl (large)' : 'md:text-2xl (بزرگ)'}
                 </span>
               </div>
             </div>
           </div>
         </div>
-      )}
-    </section>
+      </section>
+    </div>
   );
 }

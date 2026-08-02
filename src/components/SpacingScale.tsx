@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import { SPACING_SCALE } from '../data';
 import { Move, Copy, Check } from 'lucide-react';
 
-export default function SpacingScale() {
+interface SpacingScaleProps {
+  dir?: 'rtl' | 'ltr';
+}
+
+export default function SpacingScale({ dir = 'rtl' }: SpacingScaleProps) {
+  const isEn = dir === 'ltr';
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
   const handleCopy = (text: string, index: number) => {
@@ -16,14 +21,20 @@ export default function SpacingScale() {
       <div className="flex items-center justify-between border-b border-zinc-800/60 pb-4">
         <div className="flex items-center gap-2">
           <Move className="h-5 w-5 text-cyan-400" />
-          <h2 className="text-lg font-bold text-white">۳. مقیاس فاصله‌ها و ابزارها (Spacing Scale)</h2>
+          <h2 className="text-lg font-bold text-white">
+            {isEn ? '3. Spacing Scale & Utilities' : '۳. مقیاس فاصله‌ها و ابزارها (Spacing Scale)'}
+          </h2>
         </div>
-        <span className="text-xs text-zinc-400 font-medium">مبنای طراحی ۴ پیکسلی تیل‌وند</span>
+        <span className="text-xs text-zinc-400 font-medium">
+          {isEn ? 'Tailwind 4px Grid Foundation' : 'مبنای طراحی ۴ پیکسلی تلویند'}
+        </span>
       </div>
 
       <div className="glass-panel rounded-2xl p-6">
         <p className="text-xs text-zinc-400 leading-6 mb-6">
-          تیل‌وند بر اساس سیستم شبکه‌ای ۴ پیکسلی بنا شده است. مقدار پیش‌فرض <code className="text-cyan-400 font-mono">1</code> برابر با <code className="text-cyan-400 font-mono">0.25rem</code> یا همان <code className="text-cyan-400 font-mono">4px</code> است. هر ردیف را می‌توانید برای کپی کردن کلاس آن کپی کنید.
+          {isEn
+            ? 'Tailwind CSS is built on a standard 4px grid system. The default unit of 1 equals 0.25rem or 4px. Click any utility class button to copy.'
+            : 'تلویند بر اساس سیستم شبکه‌ای ۴ پیکسلی بنا شده است. مقدار پیش‌فرض 1 برابر با 0.25rem یا همان 4px است. هر ردیف را می‌توانید برای کپی کردن کلاس آن کپی کنید.'}
         </p>
 
         <div className="space-y-3 max-h-[500px] overflow-y-auto pr-2">
@@ -41,7 +52,7 @@ export default function SpacingScale() {
                   </span>
                   <div className="text-xs font-semibold text-white">
                     {space.px}px
-                    <span className="text-zinc-500 text-[10px] mr-1.5 font-normal">({space.rem})</span>
+                    <span className="text-zinc-500 text-[10px] mx-1.5 font-normal">({space.rem})</span>
                   </div>
                 </div>
 

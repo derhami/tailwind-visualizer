@@ -1,14 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="ویژوالایزر تیلویند - Tailwind Visualizer">
-  <defs>
-    <linearGradient id="tailwind-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#27272a"/>
-      <stop offset="100%" stop-color="#18181b"/>
-    </linearGradient>
-  </defs>
-  <rect width="512" height="512" rx="118" fill="url(#tailwind-bg)"/>
-  <g stroke="#ffffff" stroke-width="52" stroke-linecap="round" fill="none">
-    <line x1="166" y1="166" x2="344" y2="166"/>
-    <line x1="255" y1="166" x2="255" y2="346"/>
-  </g>
-  <circle cx="392" cy="392" r="22" fill="#0ea5e9"/>
+<svg width="1254" height="1254" viewBox="0 0 1254 1254" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 600C0 317.157 0 175.736 87.868 87.868C175.736 0 317.157 0 600 0H654C936.843 0 1078.26 0 1166.13 87.868C1254 175.736 1254 317.157 1254 600V654C1254 936.843 1254 1078.26 1166.13 1166.13C1078.26 1254 936.843 1254 654 1254H600C317.157 1254 175.736 1254 87.868 1166.13C0 1078.26 0 936.843 0 654V600Z" fill="url(#paint0_linear_2550_17144)"/>
+<path d="M927.38 346.812L922.918 458.75H685.58V906.5H564.719V458.75H327.38V346.812H927.38Z" fill="#3A85FF"/>
+<defs>
+<linearGradient id="paint0_linear_2550_17144" x1="627" y1="0" x2="627" y2="1254" gradientUnits="userSpaceOnUse">
+<stop stop-color="#252528"/>
+<stop offset="1" stop-color="#18181B"/>
+</linearGradient>
+</defs>
 </svg>
